@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QRIS Approve Simulator — ProStroke Billiard</title>
+  <style>
+    :root {
+      --bg: #111413;
+      --surface: #191e1c;
+      --felt: #0b291e;
+      --gold: #c9a24d;
+      --text: #f0f2f1;
+      --muted: #9ba8a2;
+      --border: #28302d;
+      --green: #16a34a;
+      --green-hover: #15803d;
+      --mint: #6ee7b7;
+      --red: #f87171;
+      --red-bg: rgba(248, 113, 113, 0.14);
+      --green-bg: rgba(110, 231, 183, 0.14);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding: 1.75rem 1rem 3rem;
+    }
+
+    .wrap {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .head {
+      background-color: var(--felt);
+      border: 1px solid #1f5c45;
+      border-bottom: 2px solid var(--gold);
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.4rem;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .head h1 {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: 0.3px;
+    }
+
+    .head h1 span {
+      color: var(--gold);
+    }
+
+    .head p {
+      font-size: 0.8rem;
+      color: #cbd5d0;
+    }
+
+    .live-pill {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--mint);
+      background-color: rgba(15, 56, 41, 0.9);
+      border: 1px solid #1f6e51;
+      padding: 0.25rem 0.65rem;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.38rem;
+      white-space: nowrap;
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background-color: var(--mint);
+      animation: blink 1.4s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--gold);
+      margin: 1.35rem 0 0.65rem;
+    }
+
+    .list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+
+    .tx-card {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 0.95rem 1.1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .tx-card.highlight {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 1px var(--gold);
+    }
+
+    .tx-id {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .tx-meta {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 0.15rem;
+    }
+
+    .tx-amount {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin-top: 0.25rem;
+    }
+
+    .tx-actions {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .btn {
+      font-family: inherit;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 0.48rem 0.9rem;
+      border-radius: 6px;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+
+    .btn-approve {
+      background-color: var(--green);
+      color: #ffffff;
+    }
+
+    .btn-approve:hover {
+      background-color: var(--green-hover);
+    }
+
+    .btn-reject {
+      background-color: transparent;
+      border-color: rgba(248, 113, 113, 0.4);
+      color: var(--red);
+    }
+
+    .btn-reject:hover {
+      background-color: var(--red-bg);
+    }
+
+    .tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.22rem 0.6rem;
+      border-radius: 999px;
+      text-transform: uppercase;
+    }
+
+    .tag-paid {
+      background-color: var(--green-bg);
+      color: var(--mint);
+      border: 1px solid rgba(110, 231, 183, 0.4);
+    }
+
+    .tag-rejected {
+      background-color: var(--red-bg);
+      color: var(--red);
+      border: 1px solid rgba(248, 113, 113, 0.4);
+    }
+
+    .empty {
+      background-color: var(--surface);
+      border: 1px dashed var(--border);
+      border-radius: 8px;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      font-size: 0.84rem;
+      color: var(--muted);
+    }
+
+    .log {
+      margin-top: 1.35rem;
+      font-size: 0.78rem;
+      color: var(--mint);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="head">
+      <div>
+        <h1>QRIS Simulator &bull; <span>PROSTROKE BILLIARD</span></h1>
+        <p>Approve atau tolak transaksi QRIS pelanggan secara realtime lintas tab</p>
+      </div>
+      <span class="live-pill"><span class="dot"></span> LIVE SYNC</span>
+    </header>
+
+    <div id="sim-root"></div>
+    <div id="sim-log" class="log"></div>
+  </div>
+
+  <script src="qris-approve.js"></script>
+</body>
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Keranjang Belanja — ProStroke Billiard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="site-header-root"></div>
+
+  <header class="page-banner">
+    <div class="container">
+      <span class="step-tag">Langkah 1 dari 3</span>
+      <h1>Keranjang Belanja</h1>
+      <p>Atur jumlah pesanan tongkat billiard, gunakan kode promo, atau lanjutkan ke tahap checkout.</p>
+    </div>
+  </header>
+
+  <main class="page-container">
+    <div id="cart-root"></div>
+  </main>
+
+  <div id="site-footer-root"></div>
+
+  <script src="app.js"></script>
+  <script>
+    (function () {
+      const store = window.PSStore;
+      store.renderHeader("cart");
+      store.renderFooter();
+
+      const root = document.getElementById("cart-root");
+
+      function renderCart() {
+        const cart = store.getCart();
+
+        if (cart.length === 0) {
+          root.innerHTML =
+            '<div class="panel empty-state">' +
+            '  <h3>Keranjang belanja masih kosong</h3>' +
+            '  <p>Silakan pilih koleksi tongkat billiard custom terlebih dahulu dari halaman katalog.</p>' +
+            '  <a href="index.html" class="btn-gold">Kembali ke Katalog</a>' +
+            '</div>';
+          return;
+        }
+
+        const totals = store.getCartTotals(35000);
+        const totalQty = store.getCartCount();
+        const activePromo = store.getPromoCode();
+
+        const itemsHtml = cart.map(function (item) {
+          const itemSubtotal = item.unitPrice * item.qty;
+          return (
+            '<div class="cart-row-item" data-key="' + store.escapeHtml(item.key) + '">' +
+            '  <img class="cart-thumb" src="' + store.escapeHtml(store.getImageUrl(item.image)) + '" alt="' + store.escapeHtml(item.name) + '" onerror="PSStore.handleImgError(this, \'' + store.escapeHtml(item.image) + '\')">' +
+            '  <div class="cart-row-info">' +
+            '    <h3>' + store.escapeHtml(item.name) + '</h3>' +
+            '    <div class="cart-row-meta">Varian: ' + store.escapeHtml(item.variant) + '</div>' +
+            '    <div class="cart-row-unit">' + store.formatRupiah(item.unitPrice) + ' / unit</div>' +
+            '  </div>' +
+            '  <div class="cart-row-actions">' +
+            '    <div class="qty-control-box">' +
+            '      <button type="button" class="qty-step-btn btn-dec" data-key="' + store.escapeHtml(item.key) + '" aria-label="Kurangi jumlah">&minus;</button>' +
+            '      <input type="number" class="qty-num-input" min="1" max="99" value="' + item.qty + '" data-key="' + store.escapeHtml(item.key) + '" aria-label="Jumlah">' +
+            '      <button type="button" class="qty-step-btn btn-inc" data-key="' + store.escapeHtml(item.key) + '" aria-label="Tambah jumlah">+</button>' +
+            '    </div>' +
+            '    <div class="cart-row-subtotal">' + store.formatRupiah(itemSubtotal) + '</div>' +
+            '    <button type="button" class="btn-danger-outline btn-sm btn-remove" data-key="' + store.escapeHtml(item.key) + '">Hapus</button>' +
+            '  </div>' +
+            '</div>'
+          );
+        }).join("");
+
+        root.innerHTML =
+          '<div class="two-col">' +
+          '  <section class="panel">' +
+          '    <div class="panel-title">' +
+          '      <span>Daftar Tongkat (' + totalQty + ' item)</span>' +
+          '      <button type="button" class="btn-danger-outline btn-sm" id="btn-clear-cart">Kosongkan Keranjang</button>' +
+          '    </div>' +
+          '    <div>' + itemsHtml + '</div>' +
+          '  </section>' +
+          '  <aside class="panel">' +
+          '    <div class="panel-title"><span>Ringkasan Belanja</span></div>' +
+          '    <div class="promo-row">' +
+          '      <input type="text" id="promo-code-input" placeholder="Kode promo (PROSTROKE10)" value="' + store.escapeHtml(activePromo) + '">' +
+          '      <button type="button" class="btn-outline btn-sm" id="btn-apply-promo">Pakai</button>' +
+          '    </div>' +
+          '    <div class="summary-row">' +
+          '      <span>Subtotal (' + totalQty + ' item)</span>' +
+          '      <strong>' + store.formatRupiah(totals.subtotal) + '</strong>' +
+          '    </div>' +
+          (totals.discount > 0
+            ? '<div class="summary-row discount">' +
+              '  <span>Diskon Promo (' + store.escapeHtml(totals.promoCode) + ' 10%)</span>' +
+              '  <strong>&minus;' + store.formatRupiah(totals.discount) + '</strong>' +
+              '</div>'
+            : '') +
+          '    <div class="summary-row">' +
+          '      <span>Estimasi Kurir Pipa PVC</span>' +
+          '      <strong>' + store.formatRupiah(totals.ongkir) + '</strong>' +
+          '    </div>' +
+          '    <hr class="summary-divider">' +
+          '    <div class="summary-total">' +
+          '      <span>Grand Total</span>' +
+          '      <span>' + store.formatRupiah(totals.grandTotal) + '</span>' +
+          '    </div>' +
+          '    <a href="checkout.html" class="btn-gold btn-block">Lanjut ke Checkout &rarr;</a>' +
+          '    <a href="index.html" class="btn-outline btn-block" style="margin-top:0.65rem;">+ Tambah Tongkat Lainnya</a>' +
+          '  </aside>' +
+          '</div>';
+      }
+
+      root.addEventListener("click", function (e) {
+        const decBtn = e.target.closest(".btn-dec");
+        if (decBtn) {
+          const key = decBtn.getAttribute("data-key");
+          const item = store.getCart().find(function (c) { return c.key === key; });
+          if (item) {
+            if (item.qty <= 1) {
+              store.removeFromCart(key);
+              store.showToast(item.name + " dihapus dari keranjang");
+            } else {
+              store.updateCartQty(key, item.qty - 1);
+            }
+            renderCart();
+          }
+          return;
+        }
+
+        const incBtn = e.target.closest(".btn-inc");
+        if (incBtn) {
+          const key = incBtn.getAttribute("data-key");
+          const item = store.getCart().find(function (c) { return c.key === key; });
+          if (item) {
+            store.updateCartQty(key, item.qty + 1);
+            renderCart();
+          }
+          return;
+        }
+
+        const removeBtn = e.target.closest(".btn-remove");
+        if (removeBtn) {
+          const key = removeBtn.getAttribute("data-key");
+          const item = store.getCart().find(function (c) { return c.key === key; });
+          store.removeFromCart(key);
+          if (item) store.showToast(item.name + " dihapus dari keranjang");
+          renderCart();
+          return;
+        }
+
+        if (e.target.id === "btn-clear-cart") {
+          store.clearCart();
+          store.showToast("Keranjang dikosongkan");
+          renderCart();
+          return;
+        }
+
+        if (e.target.id === "btn-apply-promo") {
+          const input = document.getElementById("promo-code-input");
+          const res = store.applyPromoCode(input ? input.value : "");
+          if (res.valid) {
+            store.showToast("Kode promo PROSTROKE10 aktif! Diskon 10%.");
+          } else {
+            store.showToast("Kode promo tidak valid (coba: PROSTROKE10).");
+          }
+          renderCart();
+        }
+      });
+
+      root.addEventListener("change", function (e) {
+        const input = e.target.closest(".qty-num-input");
+        if (!input) return;
+        const key = input.getAttribute("data-key");
+        const val = parseInt(input.value, 10);
+        if (isNaN(val) || val < 1) {
+          store.updateCartQty(key, 1);
+        } else {
+          store.updateCartQty(key, val);
+        }
+        renderCart();
+      });
+
+      store.onRealtimeUpdate(function () {
+        renderCart();
+      });
+
+      renderCart();
+    })();
+  </script>
+</body>
+</html>
