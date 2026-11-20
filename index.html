@@ -3,13 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ProStroke Billiard — Katalog Tongkat Billiard</title>
+  <title>ProStroke Billiard — Toko &amp; Katalog Tongkat Billiard</title>
   <style>
     /* Reset & Dasar */
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
@@ -23,7 +27,10 @@
     header {
       background-color: #0b291e;
       border-bottom: 2px solid #c9a24d;
-      padding: 1.25rem 2rem;
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
     .header-container {
@@ -40,10 +47,11 @@
       display: flex;
       align-items: center;
       gap: 0.75rem;
+      text-decoration: none;
     }
 
     .brand-title {
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       font-weight: 700;
       letter-spacing: 1px;
       color: #ffffff;
@@ -53,12 +61,55 @@
       color: #c9a24d;
     }
 
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
     .nav-list {
       list-style: none;
       display: flex;
-      gap: 1.5rem;
+      gap: 1.25rem;
       font-size: 0.95rem;
+    }
+
+    .nav-list a {
       color: #cbd5d0;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-list a:hover {
+      color: #c9a24d;
+    }
+
+    .cart-btn {
+      background-color: #c9a24d;
+      color: #111413;
+      border: none;
+      padding: 0.55rem 1rem;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: background-color 0.2s;
+    }
+
+    .cart-btn:hover {
+      background-color: #dbb562;
+    }
+
+    .cart-count {
+      background-color: #0b291e;
+      color: #ffffff;
+      font-size: 0.75rem;
+      padding: 0.1rem 0.45rem;
+      border-radius: 999px;
     }
 
     /* Hero Banner */
@@ -70,7 +121,7 @@
     }
 
     .hero-content {
-      max-width: 750px;
+      max-width: 780px;
       margin: 0 auto;
     }
 
@@ -83,20 +134,75 @@
     .hero p {
       color: #b0bdb7;
       font-size: 1.05rem;
+      margin-bottom: 1.5rem;
     }
 
-    /* Katalog Utama */
+    .hero-cta {
+      display: inline-block;
+      background-color: #c9a24d;
+      color: #111413;
+      text-decoration: none;
+      font-weight: 700;
+      padding: 0.75rem 1.75rem;
+      border-radius: 6px;
+      transition: background-color 0.2s;
+    }
+
+    .hero-cta:hover {
+      background-color: #dbb562;
+    }
+
+    /* Filter & Pencarian */
     main {
       max-width: 1200px;
-      margin: 3rem auto;
+      margin: 2.5rem auto;
       padding: 0 2rem;
+    }
+
+    .controls-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.75rem;
+      background-color: #191e1c;
+      padding: 1rem 1.25rem;
+      border-radius: 10px;
+      border: 1px solid #28302d;
+    }
+
+    .search-input {
+      flex: 1;
+      min-width: 220px;
+      padding: 0.65rem 1rem;
+      border-radius: 6px;
+      border: 1px solid #2e3834;
+      background-color: #111413;
+      color: #ffffff;
+      font-size: 0.95rem;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: #c9a24d;
+    }
+
+    .filter-select {
+      padding: 0.65rem 1rem;
+      border-radius: 6px;
+      border: 1px solid #2e3834;
+      background-color: #111413;
+      color: #ffffff;
+      font-size: 0.95rem;
+      cursor: pointer;
     }
 
     .section-header {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      margin-bottom: 2rem;
+      margin-bottom: 1.75rem;
       border-bottom: 1px solid #262e2b;
       padding-bottom: 0.75rem;
     }
@@ -125,6 +231,12 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+      border-color: #c9a24d;
     }
 
     .product-image {
@@ -132,6 +244,8 @@
       border-bottom: 1px solid #28302d;
       height: 220px;
       overflow: hidden;
+      cursor: pointer;
+      position: relative;
     }
 
     .product-image img {
@@ -139,6 +253,30 @@
       height: 100%;
       object-fit: cover;
       display: block;
+      transition: transform 0.3s;
+    }
+
+    .product-card:hover .product-image img {
+      transform: scale(1.04);
+    }
+
+    .stock-badge-float {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 0.72rem;
+      padding: 0.22rem 0.55rem;
+      border-radius: 4px;
+      background-color: rgba(15, 56, 41, 0.92);
+      color: #6ee7b7;
+      border: 1px solid #1b5e45;
+      font-weight: 600;
+    }
+
+    .stock-badge-float.limited {
+      background-color: rgba(56, 42, 15, 0.92);
+      color: #fcd34d;
+      border-color: #664d1b;
     }
 
     .product-info {
@@ -162,6 +300,7 @@
       font-weight: 700;
       color: #ffffff;
       margin-bottom: 0.5rem;
+      cursor: pointer;
     }
 
     .product-specs {
@@ -175,29 +314,268 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 0.75rem;
       padding-top: 1rem;
       border-top: 1px solid #262e2b;
     }
 
     .product-price {
-      font-size: 1.15rem;
+      font-size: 1.1rem;
       font-weight: 700;
       color: #ffffff;
     }
 
-    .stock-badge {
-      font-size: 0.75rem;
-      padding: 0.25rem 0.6rem;
-      border-radius: 4px;
+    .add-cart-btn {
       background-color: #0f3829;
-      color: #6ee7b7;
-      border: 1px solid #1b5e45;
+      color: #ffffff;
+      border: 1px solid #1f6e51;
+      padding: 0.45rem 0.85rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s, border-color 0.2s;
     }
 
-    .stock-badge.limited {
-      background-color: #382a0f;
-      color: #fcd34d;
-      border-color: #664d1b;
+    .add-cart-btn:hover {
+      background-color: #c9a24d;
+      color: #111413;
+      border-color: #c9a24d;
+    }
+
+    /* Modal Detail Produk */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.78);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 1.5rem;
+      z-index: 200;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-card {
+      background-color: #191e1c;
+      border: 1px solid #c9a24d;
+      border-radius: 12px;
+      max-width: 720px;
+      width: 100%;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+    }
+
+    @media (max-width: 650px) {
+      .modal-card {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .modal-img-wrap {
+      background-color: #121614;
+      min-height: 280px;
+    }
+
+    .modal-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .modal-body {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      background: rgba(17, 20, 19, 0.85);
+      color: #ffffff;
+      border: 1px solid #3a4440;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      font-size: 1.1rem;
+      cursor: pointer;
+    }
+
+    /* Drawer Keranjang */
+    .cart-drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.65);
+      display: none;
+      justify-content: flex-end;
+      z-index: 250;
+    }
+
+    .cart-drawer-overlay.active {
+      display: flex;
+    }
+
+    .cart-drawer {
+      background-color: #191e1c;
+      width: 100%;
+      max-width: 420px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      border-left: 2px solid #c9a24d;
+    }
+
+    .cart-header {
+      padding: 1.25rem;
+      background-color: #0b291e;
+      border-bottom: 1px solid #28302d;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cart-items {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .cart-item {
+      display: flex;
+      gap: 0.85rem;
+      background-color: #121614;
+      padding: 0.75rem;
+      border-radius: 8px;
+      border: 1px solid #28302d;
+      align-items: center;
+    }
+
+    .cart-item img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+
+    .cart-item-info {
+      flex: 1;
+    }
+
+    .cart-item-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .cart-item-price {
+      font-size: 0.82rem;
+      color: #c9a24d;
+    }
+
+    .qty-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      margin-top: 0.35rem;
+    }
+
+    .qty-btn {
+      background-color: #262e2b;
+      color: #ffffff;
+      border: none;
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .remove-btn {
+      background: none;
+      border: none;
+      color: #f87171;
+      font-size: 0.8rem;
+      cursor: pointer;
+      margin-left: auto;
+    }
+
+    .cart-footer {
+      padding: 1.25rem;
+      border-top: 1px solid #28302d;
+      background-color: #141817;
+    }
+
+    .cart-total-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .checkout-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .checkout-form input {
+      padding: 0.55rem 0.75rem;
+      border-radius: 6px;
+      border: 1px solid #2e3834;
+      background-color: #111413;
+      color: #ffffff;
+      font-size: 0.88rem;
+    }
+
+    .wa-checkout-btn {
+      width: 100%;
+      padding: 0.8rem;
+      background-color: #25d366;
+      color: #0b141a;
+      border: none;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+    }
+
+    .wa-checkout-btn:hover {
+      background-color: #2fe072;
+    }
+
+    /* Toast Notifikasi */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #0b291e;
+      color: #ffffff;
+      border: 1px solid #c9a24d;
+      padding: 0.7rem 1.25rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      z-index: 300;
+      display: none;
+    }
+
+    .toast.show {
+      display: block;
     }
 
     /* Footer */
@@ -221,359 +599,355 @@
   <!-- Header -->
   <header>
     <div class="header-container">
-      <div class="brand">
+      <a href="#beranda" class="brand">
         <svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true">
           <circle cx="16" cy="16" r="15" fill="#111" stroke="#c9a24d" stroke-width="2"/>
           <circle cx="16" cy="16" r="6" fill="#fff"/>
           <text x="16" y="19.5" text-anchor="middle" font-size="10" font-weight="bold" fill="#111" font-family="sans-serif">8</text>
         </svg>
         <div class="brand-title">PROSTROKE <span>BILLIARD</span></div>
+      </a>
+      <div class="nav-right">
+        <ul class="nav-list">
+          <li><a href="#beranda">Beranda</a></li>
+          <li><a href="#katalog">Katalog Tongkat</a></li>
+          <li><a href="#kontak">Kontak Toko</a></li>
+        </ul>
+        <button class="cart-btn" id="open-cart-btn" type="button">
+          Keranjang <span class="cart-count" id="cart-count">0</span>
+        </button>
       </div>
-      <ul class="nav-list">
-        <li>Beranda</li>
-        <li>Katalog Tongkat</li>
-        <li>Spesifikasi</li>
-        <li>Kontak Toko</li>
-      </ul>
     </div>
   </header>
 
   <!-- Hero Banner -->
-  <section class="hero">
+  <section class="hero" id="beranda">
     <div class="hero-content">
       <h1>Koleksi Tongkat Billiard Custom &amp; Presisi</h1>
-      <p>Menampilkan koleksi lengkap tongkat billiard custom pilihan berbahan kayu Maple, Ebony, Ash, hingga Carbon Fiber untuk performa terbaik.</p>
+      <p>Belanja tongkat billiard custom pilihan berbahan kayu Maple, Ebony, Ash, hingga Carbon Fiber untuk performa terbaik.</p>
+      <a href="#katalog" class="hero-cta">Belanja Sekarang</a>
     </div>
   </section>
 
   <!-- Katalog Produk -->
-  <main>
+  <main id="katalog">
+    <div class="controls-bar">
+      <input type="text" id="search-input" class="search-input" placeholder="Cari nama tongkat, bahan, atau joint...">
+      <select id="category-filter" class="filter-select">
+        <option value="all">Semua Kategori</option>
+      </select>
+    </div>
+
     <div class="section-header">
       <h2>Katalog Produk</h2>
       <span id="product-count">Menampilkan 30 produk</span>
     </div>
 
-    <div class="catalog-grid" id="catalog-container">
-      <!-- Data produk dimuat oleh JavaScript standar -->
-    </div>
+    <div class="catalog-grid" id="catalog-container"></div>
   </main>
 
   <!-- Footer -->
-  <footer>
+  <footer id="kontak">
     <p><strong>ProStroke Billiard Store</strong> — Jl. Sudirman No. 88, Jakarta Pusat</p>
-    <p>Buka Setiap Hari: 10.00 - 21.00 WIB | Tampilan Katalog Resmi</p>
+    <p>Buka Setiap Hari: 10.00 - 21.00 WIB | Pemesanan Online &amp; Pengiriman Seluruh Indonesia</p>
     <p>&copy; 2025 ProStroke Billiard. Seluruh hak cipta dilindungi.</p>
   </footer>
 
-  <script>
-    // Folder lokal tempat menyimpan gambar JPG
-    const imageFolder = "Tongkat Billiard";
+  <!-- Modal Detail Produk -->
+  <div class="modal-overlay" id="product-modal">
+    <div class="modal-card">
+      <button class="modal-close" id="close-modal-btn" type="button">&times;</button>
+      <div class="modal-img-wrap">
+        <img id="modal-img" src="" alt="">
+      </div>
+      <div class="modal-body">
+        <div class="product-category" id="modal-category"></div>
+        <h3 class="product-name" id="modal-name" style="cursor:default; font-size:1.35rem;"></h3>
+        <p class="product-specs" id="modal-specs" style="flex-grow:0;"></p>
+        <div class="product-price" id="modal-price" style="font-size:1.35rem; color:#c9a24d;"></div>
+        <div id="modal-status" style="font-size:0.85rem; color:#6ee7b7;"></div>
+        <button class="add-cart-btn" id="modal-add-btn" type="button" style="margin-top:auto; padding:0.75rem;">
+          + Tambah ke Keranjang
+        </button>
+      </div>
+    </div>
+  </div>
 
-    // Daftar 30 produk dengan nama file JPG sesuai daftar
+  <!-- Drawer Keranjang Belanja -->
+  <div class="cart-drawer-overlay" id="cart-drawer-overlay">
+    <div class="cart-drawer">
+      <div class="cart-header">
+        <h3 style="color:#ffffff;">Keranjang Belanja</h3>
+        <button class="modal-close" id="close-cart-btn" type="button" style="position:static;">&times;</button>
+      </div>
+      <div class="cart-items" id="cart-items-container"></div>
+      <div class="cart-footer">
+        <div class="cart-total-row">
+          <span>Total</span>
+          <span id="cart-total" style="color:#c9a24d;">Rp 0</span>
+        </div>
+        <div class="checkout-form">
+          <input type="text" id="buyer-name" placeholder="Nama Lengkap Anda">
+          <input type="text" id="buyer-address" placeholder="Alamat Pengiriman">
+        </div>
+        <button class="wa-checkout-btn" id="wa-checkout-btn" type="button">
+          Checkout via WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notifikasi -->
+  <div class="toast" id="toast">Produk ditambahkan ke keranjang!</div>
+
+  <script>
+    const imageFolder = "Tongkat Billiard";
+    const storeWhatsApp = "6281234567890"; // Ganti dengan nomor WhatsApp toko Anda
+
     const billiardCues = [
-      {
-        image: "Custom_billiard_cue_02ce6446.jpg",
-        category: "Custom Play Cue",
-        name: "Vortex Custom Series 01",
-        specs: "Tip: 12.5mm | Berat: 19 oz | Joint: Radial | Bahan: Canadian Maple",
-        price: "Rp 4.500.000",
-        status: "Tersedia",
-        limited: false
-      },
-      {
-        image: "Custom_billiard_cue_449213b8.jpg",
-        category: "Custom Play Cue",
-        name: "Royal Inlay Maple 02",
-        specs: "Tip: 12.4mm | Berat: 19.2 oz | Joint: Uni-Loc | Bahan: Hard Maple & Ebony",
-        price: "Rp 5.200.000",
-        status: "Tersedia",
-        limited: false
-      },
-      {
-        image: "Custom_billiard_cue_c4261d68.jpg",
-        category: "Custom Play Cue",
-        name: "Obsidian Point Cue 03",
-        specs: "Tip: 12.5mm | Berat: 19 oz | Joint: 3/8x10 | Inlay: Turquoise & Maple",
-        price: "Rp 5.850.000",
-        status: "Stok Terbatas",
-        limited: true
-      },
-      {
-        image: "Custom_billiard_cue_catalog_photo_3a62e815.jpg",
-        category: "Pro Series Cue",
-        name: "Apex Catalog Edition 04",
-        specs: "Tip: 12.25mm | Berat: 18.8 oz | Joint: Radial | Low Deflection Shaft",
-        price: "Rp 6.100.000",
-        status: "Tersedia",
-        limited: false
-      },
-      {
-        image: "Custom_billiard_cue_catalog_photo_dd25ab0f.jpg",
-        category: "Pro Series Cue",
-        name: "Grandmaster Gold 05",
-        specs: "Tip: 12.5mm | Berat: 19.5 oz | Joint: 5/16x14 | Bahan: Rosewood & Maple",
-        price: "Rp 4.900.000",
-        status: "Tersedia",
-        limited: false
-      },
-      {
-        image: "Custom_billiard_cue_displayed_1dd74f5e.jpg",
-        category: "Collector Cue",
-        name: "Heritage Display 06",
-        specs: "Tip: 12.75mm | Berat: 19 oz | Joint: Brass Pin | Linen Wrap Classic",
-        price: "Rp 6.750.000",
-        status: "Stok Terbatas",
-        limited: true
-      },
-      {
-        image: "Custom_billiard_cue_displayed_5166e83f.jpg",
-        category: "Collector Cue",
-        name: "Sovereign Wrap 07",
-        specs: "Tip: 12.5mm | Berat: 19.3 oz | Joint: Uni-Loc | Leather Grip",
-        price: "Rp 5.400.000",
-        status: "Tersedia",
-        limited: false
-      },
-      {
-        image: "Custom_billiard_cue_displayed_b7118a8b.jpg",
-        category: "Collector Cue",
-        name: "Emerald Crown 08",
-        specs: "Tip: 12.4mm | Berat: 19 oz | Joint: Radial | Green Veneer Inlay",
-        price: "Rp 6.300.000",
-        status: "Tersedia",
-        limited: false
-      },
-      {
-        image: "Custom_billiard_cue_for_catalog_08e04600.jpg",
-        category: "Carbon & Maple",
-        name: "Stealth Strike 09",
-        specs: "Tip: 12.4mm | Berat: 19 oz | Joint: Quick Release | Carbon Core",
-        price: "Rp 7.100.000",
-        status: "Tersedia",
-        limited: false
-      },
-      {
-        image: "Custom_billiard_cue_for_catalog_0e081528.jpg",
-        category: "Classic Play Cue",
-        name: "Mahogany Precision 10",
-        specs: "Tip: 12.75mm | Berat: 19.5 oz | Joint: 5/16x18 | Bahan: Mahogany",
-        price: "Rp 3.750.000",
-        status: "Tersedia",
-        limited: false
-      },
-      {
-        image: "Custom_billiard_cue_for_catalog_1ea1f7d3.jpg",
-        category: "Custom Play Cue",
-        name: "Silver Ring Custom 11",
-        specs: "Tip: 12.5mm | Berat: 19 oz | Joint: Radial | Silver Ring Accent",
-        price: "Rp 4.650.000",
-        status: "Tersedia",
-        limited: false
-      },
-      {
-        image: "Custom_billiard_cue_for_catalog_22fa7ef1.jpg",
-        category: "Custom Play Cue",
-        name: "Imperial 6-Point 12",
-        specs: "Tip: 12.5mm | Berat: 19.2 oz | Joint: 3/8x10 | 6-Point Sharp Inlay",
-        price: "Rp 5.950.000",
-        status: "Stok Terbatas",
-        limited: true
-      },
-      {
-        image: "Custom_billiard_cue_for_catalog_2ebb5a70.jpg",
-        category: "Break / Play Cue",
-        name: "Titan Force 13",
-        specs: "Tip: 13.0mm | Berat: 20 oz | Joint: Uni-Loc | Heavy Hitter",
-        price: "Rp 4.300.000",
-        status: "Tersedia",
-        limited: false
-      },
-      {
-        image: "Custom_billiard_cue_for_catalog_326eb45a.jpg",
-        category: "Classic Play Cue",
-        name: "Amber Wood Cue 14",
-        specs: "Tip: 12.5mm | Berat: 19 oz | Joint: 5/16x14 | Bahan: Curly Maple",
-        price: "Rp 4.800.000",
-        status: "Tersedia",
-        limited: false
-      },
-      {
-        image: "Custom_billiard_cue_for_catalog_38b33cce.jpg",
-        category: "Pro Series Cue",
-        name: "Mirage Pro Line 15",
-        specs: "Tip: 12.25mm | Berat: 18.9 oz | Joint: Radial | Pro Taper Shaft",
-        price: "Rp 5.600.000",
-        status: "Tersedia",
-        limited: false
-      },
-      {
-        image: "Custom_billiard_cue_for_catalog_3b8ba64a.jpg",
-        category: "Custom Play Cue",
-        name: "Crimson Edge 16",
-        specs: "Tip: 12.5mm | Berat: 19 oz | Joint: Uni-Loc | Red Veneer & Ebony",
-        price: "Rp 5.350.000",
-        status: "Tersedia",
-        limited: false
-      },
-      {
-        image: "Custom_billiard_cue_for_catalog_4c6fa4a6.jpg",
-        category: "Collector Cue",
-        name: "Artisan Ivory-Style 17",
-        specs: "Tip: 12.4mm | Berat: 19.1 oz | Joint: 3/8x10 | Handcrafted Inlay",
-        price: "Rp 7.400.000",
-        status: "Stok Terbatas",
-        limited: true
-      },
-      {
-        image: "Custom_billiard_cue_for_catalog_58994981.jpg",
-        category: "Classic Play Cue",
-        name: "Nordic Ash Cue 18",
-        specs: "Tip: 12.5mm | Berat: 18.5 oz | Joint: Brass | Bahan: Selected Ash",
-        price: "Rp 3.550.000",
-        status: "Tersedia",
-        limited: false
-      },
-      {
-        image: "Custom_billiard_cue_for_catalog_86b7dce7.jpg",
-        category: "Carbon Series",
-        name: "Shadow Carbon 19",
-        specs: "Tip: 12.4mm | Berat: 19 oz | Joint: Radial | Full Carbon Matte",
-        price: "Rp 6.900.000",
-        status: "Tersedia",
-        limited: false
-      },
-      {
-        image: "Custom_billiard_cue_for_catalog_a2b68c65.jpg",
-        category: "Custom Play Cue",
-        name: "Billiard Prestige 20",
-        specs: "Tip: 12.5mm | Berat: 19.4 oz | Joint: 5/16x18 | Irish Linen Wrap",
-        price: "Rp 4.450.000",
-        status: "Tersedia",
-        limited: false
-      },
-      {
-        image: "Custom_billiard_cue_for_catalog_b0b1cef0.jpg",
-        category: "Pro Series Cue",
-        name: "Velocity Tournament 21",
-        specs: "Tip: 12.25mm | Berat: 19 oz | Joint: Uni-Loc | Low Deflection",
-        price: "Rp 5.750.000",
-        status: "Tersedia",
-        limited: false
-      },
-      {
-        image: "Custom_billiard_cue_for_catalog_b2ab08f5.jpg",
-        category: "Custom Play Cue",
-        name: "Golden Crest 22",
-        specs: "Tip: 12.5mm | Berat: 19.2 oz | Joint: Radial | Gold Ring & Maple",
-        price: "Rp 5.150.000",
-        status: "Tersedia",
-        limited: false
-      },
-      {
-        image: "Custom_billiard_cue_for_catalog_c14de881.jpg",
-        category: "Collector Cue",
-        name: "Monarch 8-Point 23",
-        specs: "Tip: 12.4mm | Berat: 19 oz | Joint: 3/8x10 | Cocobolo & Ebony",
-        price: "Rp 6.600.000",
-        status: "Stok Terbatas",
-        limited: true
-      },
-      {
-        image: "Custom_billiard_cue_on_background_1a1ff74c.jpg",
-        category: "Studio Edition",
-        name: "Midnight Velvet 24",
-        specs: "Tip: 12.5mm | Berat: 19 oz | Joint: Uni-Loc | Textured Leather Grip",
-        price: "Rp 4.950.000",
-        status: "Tersedia",
-        limited: false
-      },
-      {
-        image: "Custom_billiard_cue_on_background_89060ad2.jpg",
-        category: "Studio Edition",
-        name: "Walnut Classic 25",
-        specs: "Tip: 12.75mm | Berat: 19.5 oz | Joint: 5/16x14 | Bahan: Dark Walnut",
-        price: "Rp 3.900.000",
-        status: "Tersedia",
-        limited: false
-      },
-      {
-        image: "Custom_billiard_cue_on_background_a14b26b1.jpg",
-        category: "Studio Edition",
-        name: "Cobalt Strike 26",
-        specs: "Tip: 12.4mm | Berat: 19 oz | Joint: Radial | Blue Pearl Inlay",
-        price: "Rp 5.450.000",
-        status: "Tersedia",
-        limited: false
-      },
-      {
-        image: "Custom_billiard_cue_on_background_a8b1883c.jpg",
-        category: "Studio Edition",
-        name: "Zenith Maple Pro 27",
-        specs: "Tip: 12.5mm | Berat: 18.8 oz | Joint: 3/8x10 | AAA Birdseye Maple",
-        price: "Rp 5.800.000",
-        status: "Tersedia",
-        limited: false
-      },
-      {
-        image: "Custom_billiard_cue_on_background_edc20a43.jpg",
-        category: "Studio Edition",
-        name: "Onyx & Brass 28",
-        specs: "Tip: 12.5mm | Berat: 19.2 oz | Joint: Brass Pin | Sleek Black Finish",
-        price: "Rp 4.700.000",
-        status: "Tersedia",
-        limited: false
-      },
-      {
-        image: "Custom_billiard_cue_photorealist..._75336355.jpg",
-        category: "Signature Series",
-        name: "Masterpiece Signature 29",
-        specs: "Tip: 12.25mm | Berat: 19 oz | Joint: Radial | Limited Custom Build",
-        price: "Rp 7.800.000",
-        status: "Stok Terbatas",
-        limited: true
-      },
-      {
-        image: "Custom_billiard_cue_photo_8e3036ea.jpg",
-        category: "Signature Series",
-        name: "Champion Legacy 30",
-        specs: "Tip: 12.5mm | Berat: 19.3 oz | Joint: Uni-Loc | Pro Balance Weight",
-        price: "Rp 6.200.000",
-        status: "Tersedia",
-        limited: false
-      }
+      { image: "Custom_billiard_cue_02ce6446.jpg", category: "Custom Play Cue", name: "Vortex Custom Series 01", specs: "Tip: 12.5mm | Berat: 19 oz | Joint: Radial | Bahan: Canadian Maple", price: 4500000, status: "Tersedia", limited: false },
+      { image: "Custom_billiard_cue_449213b8.jpg", category: "Custom Play Cue", name: "Royal Inlay Maple 02", specs: "Tip: 12.4mm | Berat: 19.2 oz | Joint: Uni-Loc | Bahan: Hard Maple & Ebony", price: 5200000, status: "Tersedia", limited: false },
+      { image: "Custom_billiard_cue_c4261d68.jpg", category: "Custom Play Cue", name: "Obsidian Point Cue 03", specs: "Tip: 12.5mm | Berat: 19 oz | Joint: 3/8x10 | Inlay: Turquoise & Maple", price: 5850000, status: "Stok Terbatas", limited: true },
+      { image: "Custom_billiard_cue_catalog_photo_3a62e815.jpg", category: "Pro Series Cue", name: "Apex Catalog Edition 04", specs: "Tip: 12.25mm | Berat: 18.8 oz | Joint: Radial | Low Deflection Shaft", price: 6100000, status: "Tersedia", limited: false },
+      { image: "Custom_billiard_cue_catalog_photo_dd25ab0f.jpg", category: "Pro Series Cue", name: "Grandmaster Gold 05", specs: "Tip: 12.5mm | Berat: 19.5 oz | Joint: 5/16x14 | Bahan: Rosewood & Maple", price: 4900000, status: "Tersedia", limited: false },
+      { image: "Custom_billiard_cue_displayed_1dd74f5e.jpg", category: "Collector Cue", name: "Heritage Display 06", specs: "Tip: 12.75mm | Berat: 19 oz | Joint: Brass Pin | Linen Wrap Classic", price: 6750000, status: "Stok Terbatas", limited: true },
+      { image: "Custom_billiard_cue_displayed_5166e83f.jpg", category: "Collector Cue", name: "Sovereign Wrap 07", specs: "Tip: 12.5mm | Berat: 19.3 oz | Joint: Uni-Loc | Leather Grip", price: 5400000, status: "Tersedia", limited: false },
+      { image: "Custom_billiard_cue_displayed_b7118a8b.jpg", category: "Collector Cue", name: "Emerald Crown 08", specs: "Tip: 12.4mm | Berat: 19 oz | Joint: Radial | Green Veneer Inlay", price: 6300000, status: "Tersedia", limited: false },
+      { image: "Custom_billiard_cue_for_catalog_08e04600.jpg", category: "Carbon & Maple", name: "Stealth Strike 09", specs: "Tip: 12.4mm | Berat: 19 oz | Joint: Quick Release | Carbon Core", price: 7100000, status: "Tersedia", limited: false },
+      { image: "Custom_billiard_cue_for_catalog_0e081528.jpg", category: "Classic Play Cue", name: "Mahogany Precision 10", specs: "Tip: 12.75mm | Berat: 19.5 oz | Joint: 5/16x18 | Bahan: Mahogany", price: 3750000, status: "Tersedia", limited: false },
+      { image: "Custom_billiard_cue_for_catalog_1ea1f7d3.jpg", category: "Custom Play Cue", name: "Silver Ring Custom 11", specs: "Tip: 12.5mm | Berat: 19 oz | Joint: Radial | Silver Ring Accent", price: 4650000, status: "Tersedia", limited: false },
+      { image: "Custom_billiard_cue_for_catalog_22fa7ef1.jpg", category: "Custom Play Cue", name: "Imperial 6-Point 12", specs: "Tip: 12.5mm | Berat: 19.2 oz | Joint: 3/8x10 | 6-Point Sharp Inlay", price: 5950000, status: "Stok Terbatas", limited: true },
+      { image: "Custom_billiard_cue_for_catalog_2ebb5a70.jpg", category: "Break / Play Cue", name: "Titan Force 13", specs: "Tip: 13.0mm | Berat: 20 oz | Joint: Uni-Loc | Heavy Hitter", price: 4300000, status: "Tersedia", limited: false },
+      { image: "Custom_billiard_cue_for_catalog_326eb45a.jpg", category: "Classic Play Cue", name: "Amber Wood Cue 14", specs: "Tip: 12.5mm | Berat: 19 oz | Joint: 5/16x14 | Bahan: Curly Maple", price: 4800000, status: "Tersedia", limited: false },
+      { image: "Custom_billiard_cue_for_catalog_38b33cce.jpg", category: "Pro Series Cue", name: "Mirage Pro Line 15", specs: "Tip: 12.25mm | Berat: 18.9 oz | Joint: Radial | Pro Taper Shaft", price: 5600000, status: "Tersedia", limited: false },
+      { image: "Custom_billiard_cue_for_catalog_3b8ba64a.jpg", category: "Custom Play Cue", name: "Crimson Edge 16", specs: "Tip: 12.5mm | Berat: 19 oz | Joint: Uni-Loc | Red Veneer & Ebony", price: 5350000, status: "Tersedia", limited: false },
+      { image: "Custom_billiard_cue_for_catalog_4c6fa4a6.jpg", category: "Collector Cue", name: "Artisan Ivory-Style 17", specs: "Tip: 12.4mm | Berat: 19.1 oz | Joint: 3/8x10 | Handcrafted Inlay", price: 7400000, status: "Stok Terbatas", limited: true },
+      { image: "Custom_billiard_cue_for_catalog_58994981.jpg", category: "Classic Play Cue", name: "Nordic Ash Cue 18", specs: "Tip: 12.5mm | Berat: 18.5 oz | Joint: Brass | Bahan: Selected Ash", price: 3550000, status: "Tersedia", limited: false },
+      { image: "Custom_billiard_cue_for_catalog_86b7dce7.jpg", category: "Carbon Series", name: "Shadow Carbon 19", specs: "Tip: 12.4mm | Berat: 19 oz | Joint: Radial | Full Carbon Matte", price: 6900000, status: "Tersedia", limited: false },
+      { image: "Custom_billiard_cue_for_catalog_a2b68c65.jpg", category: "Custom Play Cue", name: "Billiard Prestige 20", specs: "Tip: 12.5mm | Berat: 19.4 oz | Joint: 5/16x18 | Irish Linen Wrap", price: 4450000, status: "Tersedia", limited: false },
+      { image: "Custom_billiard_cue_for_catalog_b0b1cef0.jpg", category: "Pro Series Cue", name: "Velocity Tournament 21", specs: "Tip: 12.25mm | Berat: 19 oz | Joint: Uni-Loc | Low Deflection", price: 5750000, status: "Tersedia", limited: false },
+      { image: "Custom_billiard_cue_for_catalog_b2ab08f5.jpg", category: "Custom Play Cue", name: "Golden Crest 22", specs: "Tip: 12.5mm | Berat: 19.2 oz | Joint: Radial | Gold Ring & Maple", price: 5150000, status: "Tersedia", limited: false },
+      { image: "Custom_billiard_cue_for_catalog_c14de881.jpg", category: "Collector Cue", name: "Monarch 8-Point 23", specs: "Tip: 12.4mm | Berat: 19 oz | Joint: 3/8x10 | Cocobolo & Ebony", price: 6600000, status: "Stok Terbatas", limited: true },
+      { image: "Custom_billiard_cue_on_background_1a1ff74c.jpg", category: "Studio Edition", name: "Midnight Velvet 24", specs: "Tip: 12.5mm | Berat: 19 oz | Joint: Uni-Loc | Textured Leather Grip", price: 4950000, status: "Tersedia", limited: false },
+      { image: "Custom_billiard_cue_on_background_89060ad2.jpg", category: "Studio Edition", name: "Walnut Classic 25", specs: "Tip: 12.75mm | Berat: 19.5 oz | Joint: 5/16x14 | Bahan: Dark Walnut", price: 3900000, status: "Tersedia", limited: false },
+      { image: "Custom_billiard_cue_on_background_a14b26b1.jpg", category: "Studio Edition", name: "Cobalt Strike 26", specs: "Tip: 12.4mm | Berat: 19 oz | Joint: Radial | Blue Pearl Inlay", price: 5450000, status: "Tersedia", limited: false },
+      { image: "Custom_billiard_cue_on_background_a8b1883c.jpg", category: "Studio Edition", name: "Zenith Maple Pro 27", specs: "Tip: 12.5mm | Berat: 18.8 oz | Joint: 3/8x10 | AAA Birdseye Maple", price: 5800000, status: "Tersedia", limited: false },
+      { image: "Custom_billiard_cue_on_background_edc20a43.jpg", category: "Studio Edition", name: "Onyx & Brass 28", specs: "Tip: 12.5mm | Berat: 19.2 oz | Joint: Brass Pin | Sleek Black Finish", price: 4700000, status: "Tersedia", limited: false },
+      { image: "Custom_billiard_cue_photorealist._75336355.jpg", category: "Signature Series", name: "Masterpiece Signature 29", specs: "Tip: 12.25mm | Berat: 19 oz | Joint: Radial | Limited Custom Build", price: 7800000, status: "Stok Terbatas", limited: true },
+      { image: "Custom_billiard_cue_photo_8e3036ea.jpg", category: "Signature Series", name: "Champion Legacy 30", specs: "Tip: 12.5mm | Berat: 19.3 oz | Joint: Uni-Loc | Pro Balance Weight", price: 6200000, status: "Tersedia", limited: false }
     ];
 
-    // Render katalog ke dalam DOM saat halaman dimuat (tanpa interaktivitas)
-    document.addEventListener("DOMContentLoaded", function () {
+    let cart = [];
+    let activeModalIndex = null;
+
+    function formatRupiah(angka) {
+      return "Rp " + angka.toLocaleString("id-ID");
+    }
+
+    // Penanganan gambar gagal muat (khususnya file dengan karakter "._" seperti Masterpiece Signature 29)
+    function handleImgError(imgEl, originalFile) {
+      const step = parseInt(imgEl.dataset.fallbackStep || "0", 10);
+      if (step === 0 && originalFile.includes("._")) {
+        imgEl.dataset.fallbackStep = "1";
+        imgEl.src = `${imageFolder}/${originalFile.replace("._", "_")}`;
+      } else if (step <= 1) {
+        imgEl.dataset.fallbackStep = "2";
+        imgEl.src = `${imageFolder}/${originalFile.replace(/\.jpg$/i, ".png")}`;
+      } else if (step <= 2) {
+        imgEl.dataset.fallbackStep = "3";
+        imgEl.src = `${imageFolder}/Custom_billiard_cue_photo_8e3036ea.jpg`;
+      } else {
+        imgEl.onerror = null;
+      }
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById("toast");
+      toast.textContent = msg;
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 2000);
+    }
+
+    function renderCatalog() {
       const container = document.getElementById("catalog-container");
       const countLabel = document.getElementById("product-count");
+      const keyword = document.getElementById("search-input").value.toLowerCase().trim();
+      const selectedCat = document.getElementById("category-filter").value;
 
-      countLabel.textContent = `Menampilkan ${billiardCues.length} produk`;
+      const filtered = billiardCues
+        .map((cue, idx) => ({ ...cue, idx }))
+        .filter(cue => {
+          const matchCat = selectedCat === "all" || cue.category === selectedCat;
+          const matchText =
+            cue.name.toLowerCase().includes(keyword) ||
+            cue.specs.toLowerCase().includes(keyword) ||
+            cue.category.toLowerCase().includes(keyword);
+          return matchCat && matchText;
+        });
 
-      let htmlContent = "";
-      billiardCues.forEach(function (cue) {
-        const badgeClass = cue.limited ? "stock-badge limited" : "stock-badge";
+      countLabel.textContent = `Menampilkan ${filtered.length} produk`;
+
+      if (filtered.length === 0) {
+        container.innerHTML = `<p style="color:#9ba8a2;">Produk tidak ditemukan.</p>`;
+        return;
+      }
+
+      container.innerHTML = filtered.map(cue => {
+        const badgeClass = cue.limited ? "stock-badge-float limited" : "stock-badge-float";
         const imagePath = `${imageFolder}/${cue.image}`;
-
-        htmlContent += `
+        return `
           <article class="product-card">
-            <div class="product-image">
-              <img src="${imagePath}" alt="${cue.name}" loading="lazy">
+            <div class="product-image" onclick="openModal(${cue.idx})">
+              <img src="${imagePath}" alt="${cue.name}" loading="lazy" onerror="handleImgError(this, '${cue.image}')">
+              <span class="${badgeClass}">${cue.status}</span>
             </div>
             <div class="product-info">
               <div class="product-category">${cue.category}</div>
-              <h3 class="product-name">${cue.name}</h3>
+              <h3 class="product-name" onclick="openModal(${cue.idx})">${cue.name}</h3>
               <p class="product-specs">${cue.specs}</p>
               <div class="product-footer">
-                <div class="product-price">${cue.price}</div>
-                <span class="${badgeClass}">${cue.status}</span>
+                <div class="product-price">${formatRupiah(cue.price)}</div>
+                <button class="add-cart-btn" type="button" onclick="addToCart(${cue.idx})">+ Beli</button>
               </div>
             </div>
           </article>
         `;
+      }).join("");
+    }
+
+    function openModal(idx) {
+      activeModalIndex = idx;
+      const cue = billiardCues[idx];
+      const modalImg = document.getElementById("modal-img");
+      modalImg.dataset.fallbackStep = "0";
+      modalImg.onerror = function () { handleImgError(this, cue.image); };
+      modalImg.src = `${imageFolder}/${cue.image}`;
+      modalImg.alt = cue.name;
+
+      document.getElementById("modal-category").textContent = cue.category;
+      document.getElementById("modal-name").textContent = cue.name;
+      document.getElementById("modal-specs").textContent = cue.specs;
+      document.getElementById("modal-price").textContent = formatRupiah(cue.price);
+      document.getElementById("modal-status").textContent = `Status: ${cue.status}`;
+      document.getElementById("product-modal").classList.add("active");
+    }
+
+    function addToCart(idx) {
+      const existing = cart.find(item => item.idx === idx);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({ idx, qty: 1 });
+      }
+      updateCartUI();
+      showToast(`${billiardCues[idx].name} ditambahkan ke keranjang!`);
+    }
+
+    function changeQty(idx, delta) {
+      const item = cart.find(i => i.idx === idx);
+      if (!item) return;
+      item.qty += delta;
+      if (item.qty <= 0) {
+        cart = cart.filter(i => i.idx !== idx);
+      }
+      updateCartUI();
+    }
+
+    function updateCartUI() {
+      const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+      const totalPrice = cart.reduce((sum, item) => sum + billiardCues[item.idx].price * item.qty, 0);
+
+      document.getElementById("cart-count").textContent = totalQty;
+      document.getElementById("cart-total").textContent = formatRupiah(totalPrice);
+
+      const container = document.getElementById("cart-items-container");
+      if (cart.length === 0) {
+        container.innerHTML = `<p style="color:#8f9c96; text-align:center; margin-top:2rem;">Keranjang belanja masih kosong.</p>`;
+        return;
+      }
+
+      container.innerHTML = cart.map(item => {
+        const cue = billiardCues[item.idx];
+        return `
+          <div class="cart-item">
+            <img src="${imageFolder}/${cue.image}" alt="${cue.name}" onerror="handleImgError(this, '${cue.image}')">
+            <div class="cart-item-info">
+              <div class="cart-item-title">${cue.name}</div>
+              <div class="cart-item-price">${formatRupiah(cue.price)}</div>
+              <div class="qty-controls">
+                <button class="qty-btn" type="button" onclick="changeQty(${item.idx}, -1)">-</button>
+                <span>${item.qty}</span>
+                <button class="qty-btn" type="button" onclick="changeQty(${item.idx}, 1)">+</button>
+                <button class="remove-btn" type="button" onclick="changeQty(${item.idx}, -${item.qty})">Hapus</button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      // Isi dropdown kategori
+      const catSelect = document.getElementById("category-filter");
+      const categories = [...new Set(billiardCues.map(c => c.category))];
+      categories.forEach(cat => {
+        const opt = document.createElement("option");
+        opt.value = cat;
+        opt.textContent = cat;
+        catSelect.appendChild(opt);
       });
 
-      container.innerHTML = htmlContent;
+      document.getElementById("search-input").addEventListener("input", renderCatalog);
+      catSelect.addEventListener("change", renderCatalog);
+
+      // Modal events
+      document.getElementById("close-modal-btn").addEventListener("click", () => {
+        document.getElementById("product-modal").classList.remove("active");
+      });
+      document.getElementById("product-modal").addEventListener("click", (e) => {
+        if (e.target.id === "product-modal") e.target.classList.remove("active");
+      });
+      document.getElementById("modal-add-btn").addEventListener("click", () => {
+        if (activeModalIndex !== null) {
+          addToCart(activeModalIndex);
+          document.getElementById("product-modal").classList.remove("active");
+        }
+      });
+
+      // Cart drawer events
+      document.getElementById("open-cart-btn").addEventListener("click", () => {
+        document.getElementById("cart-drawer-overlay").classList.add("active");
+      });
+      document.getElementById("close-cart-btn").addEventListener("click", () => {
+        document.getElementById("cart-drawer-overlay").classList.remove("active");
+      });
+      document.getElementById("cart-drawer-overlay").addEventListener("click", (e) => {
+        if (e.target.id === "cart-drawer-overlay") e.target.classList.remove("active");
+      });
+
+      // Checkout WhatsApp
+      document.getElementById("wa-checkout-btn").addEventListener("click", () => {
+        if (cart.length === 0) {
+          showToast("Keranjang masih kosong!");
+          return;
+        }
+        const name = document.getElementById("buyer-name").value.trim() || "Pelanggan";
+        const address = document.getElementById("buyer-address").value.trim() || "-";
+        let total = 0;
+        let text = `Halo ProStroke Billiard, saya ingin memesan:\n\n`;
+        cart.forEach(item => {
+          const cue = billiardCues[item.idx];
+          const subtotal = cue.price * item.qty;
+          total += subtotal;
+          text += `- ${cue.name} (${item.qty}x) = ${formatRupiah(subtotal)}\n`;
+        });
+        text += `\n*Total: ${formatRupiah(total)}*\n`;
+        text += `Nama: ${name}\nAlamat: ${address}`;
+        window.open(`https://wa.me/${storeWhatsApp}?text=${encodeURIComponent(text)}`, "_blank");
+      });
+
+      renderCatalog();
+      updateCartUI();
     });
   </script>
 </body>
