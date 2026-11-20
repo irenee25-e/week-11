@@ -1,1 +1,2407 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ProStroke Billiard — Toko &amp; Katalog Tongkat Billiard</title>
+  <style>
+    /* Reset & Dasar */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #111413;
+      color: #f0f2f1;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* 1. Top Announcement Bar */
+    .top-bar {
+      background-color: #071b14;
+      color: #cbd5d0;
+      font-size: 0.78rem;
+      padding: 0.45rem 0;
+      border-bottom: 1px solid #16382b;
+    }
+
+    .top-bar-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .top-highlight {
+      color: #c9a24d;
+      font-weight: 700;
+    }
+
+    .top-bar-right {
+      display: flex;
+      gap: 0.4rem;
+    }
+
+    .social-dot {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background-color: #13382a;
+      color: #c9a24d;
+      font-size: 0.62rem;
+      font-weight: 700;
+    }
+
+    /* 2. Header */
+    header {
+      background-color: #0b291e;
+      border-bottom: 2px solid #c9a24d;
+      padding: 0.9rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .brand-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: #ffffff;
+    }
+
+    .brand-title span {
+      color: #c9a24d;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-list {
+      list-style: none;
+      display: flex;
+      gap: 1.25rem;
+      font-size: 0.92rem;
+    }
+
+    .nav-list a {
+      color: #cbd5d0;
+      text-decoration: none;
+      transition: color 0.2s;
+      cursor: pointer;
+    }
+
+    .nav-list a:hover,
+    .nav-list a.active {
+      color: #c9a24d;
+      font-weight: 600;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .icon-action-btn {
+      background-color: #123b2c;
+      color: #f0f2f1;
+      border: 1px solid #1f5c45;
+      padding: 0.5rem 0.75rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s;
+    }
+
+    .icon-action-btn:hover,
+    .icon-action-btn.active {
+      border-color: #c9a24d;
+      color: #c9a24d;
+    }
+
+    .cart-btn {
+      background-color: #c9a24d;
+      color: #111413;
+      border: none;
+      padding: 0.55rem 1rem;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: background-color 0.2s;
+    }
+
+    .cart-btn:hover {
+      background-color: #dbb562;
+    }
+
+    .cart-count {
+      background-color: #0b291e;
+      color: #ffffff;
+      font-size: 0.75rem;
+      padding: 0.1rem 0.45rem;
+      border-radius: 999px;
+    }
+
+    /* 3. Ticker / Marquee Strip */
+    .ticker-strip {
+      background-color: #c9a24d;
+      color: #111413;
+      overflow: hidden;
+      padding: 0.45rem 0;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+    }
+
+    .ticker-track {
+      display: flex;
+      width: max-content;
+      white-space: nowrap;
+      animation: ticker-scroll 32s linear infinite;
+    }
+
+    .ticker-track:hover {
+      animation-play-state: paused;
+    }
+
+    .ticker-item {
+      padding: 0 1.5rem;
+      text-transform: uppercase;
+    }
+
+    @keyframes ticker-scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* 4. Hero Section (2 Kolom + Spotlight) */
+    .hero {
+      background: linear-gradient(135deg, #0f3829 0%, #111413 100%);
+      padding: 3.5rem 0;
+      border-bottom: 1px solid #222926;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 0.9fr;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #6ee7b7;
+      background-color: rgba(11, 41, 30, 0.85);
+      border: 1px solid #1f6e51;
+      padding: 0.3rem 0.85rem;
+      border-radius: 999px;
+      margin-bottom: 1rem;
+    }
+
+    .hero-badge-dot {
+      width: 8px;
+      height: 8px;
+      background-color: #6ee7b7;
+      border-radius: 50%;
+    }
+
+    .hero h1 {
+      font-size: 2.35rem;
+      line-height: 1.2;
+      margin-bottom: 0.85rem;
+      color: #ffffff;
+    }
+
+    .hero h1 span {
+      color: #c9a24d;
+    }
+
+    .hero p {
+      color: #b0bdb7;
+      font-size: 1.02rem;
+      margin-bottom: 1.5rem;
+      max-width: 560px;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      background-color: #c9a24d;
+      color: #111413;
+      text-decoration: none;
+      font-weight: 700;
+      padding: 0.75rem 1.75rem;
+      border-radius: 6px;
+      transition: background-color 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .hero-cta:hover {
+      background-color: #dbb562;
+    }
+
+    .hero-cta-outline {
+      display: inline-block;
+      color: #f0f2f1;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 0.75rem 1.25rem;
+      border-radius: 6px;
+      border: 1px solid #31443c;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .hero-cta-outline:hover {
+      border-color: #c9a24d;
+      color: #c9a24d;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      border-top: 1px solid #1e332a;
+      padding-top: 1.25rem;
+    }
+
+    .stat-item strong {
+      display: block;
+      font-size: 1.35rem;
+      color: #c9a24d;
+      line-height: 1.2;
+    }
+
+    .stat-item span {
+      font-size: 0.78rem;
+      color: #9ba8a2;
+    }
+
+    /* Spotlight Card */
+    .hero-spotlight {
+      background-color: #191e1c;
+      border: 1px solid #c9a24d;
+      border-radius: 12px;
+      padding: 1.25rem;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .hero-spotlight:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+    }
+
+    .spotlight-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .spotlight-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      background-color: #0f3829;
+      color: #c9a24d;
+      padding: 0.25rem 0.65rem;
+      border-radius: 999px;
+      border: 1px solid #1f6e51;
+    }
+
+    .spotlight-img-box {
+      height: 200px;
+      border-radius: 8px;
+      overflow: hidden;
+      background-color: #121614;
+      margin-bottom: 0.9rem;
+    }
+
+    .spotlight-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .spotlight-name {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .spotlight-meta {
+      font-size: 0.82rem;
+      color: #9ba8a2;
+      margin: 0.25rem 0 0.75rem;
+    }
+
+    .spotlight-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 0.75rem;
+      border-top: 1px solid #28302d;
+    }
+
+    /* 5. Category Showcase Section */
+    .category-section {
+      padding: 2.5rem 0 0.5rem;
+    }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1rem;
+    }
+
+    .cat-card {
+      background-color: #191e1c;
+      border: 1px solid #28302d;
+      border-radius: 10px;
+      padding: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      cursor: pointer;
+      transition: border-color 0.2s, transform 0.2s, background-color 0.2s;
+    }
+
+    .cat-card:hover,
+    .cat-card.active {
+      border-color: #c9a24d;
+      background-color: #1e2723;
+      transform: translateY(-2px);
+    }
+
+    .cat-thumb {
+      width: 52px;
+      height: 52px;
+      border-radius: 8px;
+      overflow: hidden;
+      flex-shrink: 0;
+      border: 1px solid #2e3834;
+    }
+
+    .cat-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .cat-info h3 {
+      font-size: 0.88rem;
+      color: #ffffff;
+      line-height: 1.25;
+      margin-bottom: 0.15rem;
+    }
+
+    .cat-info span {
+      font-size: 0.75rem;
+      color: #c9a24d;
+    }
+
+    /* 6. Filter & Katalog */
+    main {
+      padding: 2rem 0 3rem;
+    }
+
+    .controls-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.75rem;
+      background-color: #191e1c;
+      padding: 1rem 1.25rem;
+      border-radius: 10px;
+      border: 1px solid #28302d;
+    }
+
+    .search-input {
+      flex: 1;
+      min-width: 220px;
+      padding: 0.65rem 1rem;
+      border-radius: 6px;
+      border: 1px solid #2e3834;
+      background-color: #111413;
+      color: #ffffff;
+      font-size: 0.95rem;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: #c9a24d;
+    }
+
+    .filter-select {
+      padding: 0.65rem 1rem;
+      border-radius: 6px;
+      border: 1px solid #2e3834;
+      background-color: #111413;
+      color: #ffffff;
+      font-size: 0.92rem;
+      cursor: pointer;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid #262e2b;
+      padding-bottom: 0.75rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .section-header h2 {
+      font-size: 1.45rem;
+      color: #c9a24d;
+    }
+
+    .section-header span {
+      font-size: 0.9rem;
+      color: #8f9c96;
+    }
+
+    /* Grid Produk */
+    .catalog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .product-card {
+      background-color: #191e1c;
+      border: 1px solid #28302d;
+      border-radius: 10px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+      border-color: #c9a24d;
+    }
+
+    .product-image {
+      background-color: #121614;
+      border-bottom: 1px solid #28302d;
+      height: 220px;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s;
+    }
+
+    .product-card:hover .product-image img {
+      transform: scale(1.04);
+    }
+
+    .stock-badge-float {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 0.72rem;
+      padding: 0.22rem 0.55rem;
+      border-radius: 4px;
+      background-color: rgba(15, 56, 41, 0.92);
+      color: #6ee7b7;
+      border: 1px solid #1b5e45;
+      font-weight: 600;
+    }
+
+    .stock-badge-float.limited {
+      background-color: rgba(56, 42, 15, 0.92);
+      color: #fcd34d;
+      border-color: #664d1b;
+    }
+
+    .fav-float-btn {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background-color: rgba(17, 20, 19, 0.82);
+      border: 1px solid #2e3834;
+      color: #cbd5d0;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .fav-float-btn:hover,
+    .fav-float-btn.active {
+      color: #f87171;
+      border-color: #f87171;
+      background-color: rgba(35, 18, 18, 0.92);
+    }
+
+    .product-info {
+      padding: 1.15rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .card-meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.35rem;
+    }
+
+    .product-category {
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #c9a24d;
+      font-weight: 600;
+    }
+
+    .product-rating {
+      font-size: 0.78rem;
+      color: #fcd34d;
+      font-weight: 700;
+    }
+
+    .product-name {
+      font-size: 1.12rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 0.45rem;
+      cursor: pointer;
+    }
+
+    .product-name:hover {
+      color: #c9a24d;
+    }
+
+    .product-specs {
+      font-size: 0.83rem;
+      color: #9ba8a2;
+      margin-bottom: 1.1rem;
+      flex-grow: 1;
+    }
+
+    .product-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+      padding-top: 0.9rem;
+      border-top: 1px solid #262e2b;
+    }
+
+    .product-price {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .product-old-price {
+      display: block;
+      font-size: 0.75rem;
+      color: #7d8a84;
+      text-decoration: line-through;
+      font-weight: 400;
+    }
+
+    .add-cart-btn {
+      background-color: #0f3829;
+      color: #ffffff;
+      border: 1px solid #1f6e51;
+      padding: 0.48rem 0.9rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+    }
+
+    .add-cart-btn:hover {
+      background-color: #c9a24d;
+      color: #111413;
+      border-color: #c9a24d;
+    }
+
+    /* 7. Halaman Detail Produk (Full Webstore Simulation View) */
+    .detail-view {
+      display: none;
+      padding: 2rem 0 3rem;
+    }
+
+    .detail-view.active {
+      display: block;
+    }
+
+    .breadcrumb-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.75rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #262e2b;
+    }
+
+    .breadcrumb {
+      font-size: 0.85rem;
+      color: #8f9c96;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .breadcrumb a {
+      color: #c9a24d;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .back-btn {
+      background-color: #191e1c;
+      color: #f0f2f1;
+      border: 1px solid #313d38;
+      padding: 0.45rem 0.95rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .back-btn:hover {
+      border-color: #c9a24d;
+      color: #c9a24d;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 2.5rem;
+      align-items: start;
+      margin-bottom: 3rem;
+    }
+
+    .detail-gallery-box {
+      background-color: #121614;
+      border: 1px solid #28302d;
+      border-radius: 12px;
+      overflow: hidden;
+      height: 410px;
+      margin-bottom: 0.9rem;
+    }
+
+    .detail-gallery-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .detail-spec-boxes {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+    }
+
+    .spec-mini-box {
+      background-color: #191e1c;
+      border: 1px solid #28302d;
+      border-radius: 8px;
+      padding: 0.75rem;
+      text-align: center;
+    }
+
+    .spec-mini-box span {
+      display: block;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      color: #8f9c96;
+      margin-bottom: 0.2rem;
+    }
+
+    .spec-mini-box strong {
+      font-size: 0.85rem;
+      color: #ffffff;
+    }
+
+    .detail-cat-pill {
+      display: inline-block;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #c9a24d;
+      background-color: #0b291e;
+      border: 1px solid #1f6e51;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+
+    .detail-title {
+      font-size: 1.9rem;
+      color: #ffffff;
+      margin-bottom: 0.5rem;
+    }
+
+    .detail-rating-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.85rem;
+      color: #9ba8a2;
+      margin-bottom: 1.15rem;
+    }
+
+    .detail-price-box {
+      padding: 1rem 0;
+      border-top: 1px solid #262e2b;
+      border-bottom: 1px solid #262e2b;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: baseline;
+      gap: 0.85rem;
+    }
+
+    .detail-price {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: #c9a24d;
+    }
+
+    .detail-old-price {
+      font-size: 1.05rem;
+      color: #7d8a84;
+      text-decoration: line-through;
+    }
+
+    .variant-group {
+      margin-bottom: 1.15rem;
+    }
+
+    .variant-label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #cbd5d0;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      margin-bottom: 0.5rem;
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .chip {
+      background-color: #191e1c;
+      color: #cbd5d0;
+      border: 1px solid #2e3834;
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .chip:hover {
+      border-color: #c9a24d;
+    }
+
+    .chip.active {
+      background-color: #c9a24d;
+      color: #111413;
+      border-color: #c9a24d;
+    }
+
+    .detail-buy-row {
+      display: flex;
+      gap: 0.85rem;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+      align-items: center;
+    }
+
+    .detail-qty-box {
+      display: flex;
+      align-items: center;
+      background-color: #191e1c;
+      border: 1px solid #2e3834;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .detail-qty-box button {
+      background: none;
+      border: none;
+      color: #ffffff;
+      width: 36px;
+      height: 42px;
+      font-size: 1.1rem;
+      cursor: pointer;
+    }
+
+    .detail-qty-box span {
+      width: 36px;
+      text-align: center;
+      font-weight: 700;
+    }
+
+    .btn-gold-lg {
+      flex: 1;
+      min-width: 170px;
+      background-color: #c9a24d;
+      color: #111413;
+      border: none;
+      padding: 0.78rem 1.25rem;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+    }
+
+    .btn-gold-lg:hover {
+      background-color: #dbb562;
+    }
+
+    .btn-green-lg {
+      flex: 1;
+      min-width: 160px;
+      background-color: #0f3829;
+      color: #ffffff;
+      border: 1px solid #1f6e51;
+      padding: 0.78rem 1.25rem;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+    }
+
+    .btn-green-lg:hover {
+      border-color: #c9a24d;
+      color: #c9a24d;
+    }
+
+    .detail-notice {
+      margin-top: 1.25rem;
+      background-color: rgba(15, 56, 41, 0.45);
+      border-left: 3px solid #c9a24d;
+      padding: 0.85rem 1rem;
+      border-radius: 6px;
+      font-size: 0.84rem;
+      color: #cbd5d0;
+    }
+
+    /* Tabs Detail Produk */
+    .tabs-wrapper {
+      background-color: #191e1c;
+      border: 1px solid #28302d;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .tabs-header {
+      display: flex;
+      gap: 0.5rem;
+      border-bottom: 1px solid #28302d;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      background: none;
+      border: none;
+      color: #8f9c96;
+      font-size: 0.92rem;
+      font-weight: 600;
+      padding: 0.65rem 1.15rem;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+    }
+
+    .tab-btn.active {
+      color: #c9a24d;
+      border-bottom-color: #c9a24d;
+    }
+
+    .tab-panel {
+      display: none;
+      color: #cbd5d0;
+      font-size: 0.92rem;
+    }
+
+    .tab-panel.active {
+      display: block;
+    }
+
+    .checklist {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-top: 0.85rem;
+    }
+
+    .checklist li::before {
+      content: "✓";
+      color: #c9a24d;
+      font-weight: 900;
+      margin-right: 0.6rem;
+    }
+
+    /* 8. Features Strip (Keunggulan Layanan) */
+    .features-strip {
+      background-color: #151a18;
+      border-top: 1px solid #242c29;
+      border-bottom: 1px solid #242c29;
+      padding: 2.5rem 0;
+      margin-top: 2rem;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .feature-item {
+      background-color: #191e1c;
+      border: 1px solid #28302d;
+      border-radius: 10px;
+      padding: 1.25rem;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .feature-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 8px;
+      background-color: #0b291e;
+      color: #c9a24d;
+      border: 1px solid #1f6e51;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1.2rem;
+    }
+
+    .feature-item h3 {
+      font-size: 0.98rem;
+      color: #ffffff;
+      margin-bottom: 0.25rem;
+    }
+
+    .feature-item p {
+      font-size: 0.82rem;
+      color: #9ba8a2;
+    }
+
+    /* 9. Drawer Keranjang & Modal Invoice */
+    .cart-drawer-overlay,
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.72);
+      display: none;
+      z-index: 250;
+    }
+
+    .cart-drawer-overlay.active {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1.25rem;
+    }
+
+    .cart-drawer {
+      background-color: #191e1c;
+      width: 100%;
+      max-width: 440px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      border-left: 2px solid #c9a24d;
+    }
+
+    .cart-header {
+      padding: 1.15rem 1.25rem;
+      background-color: #0b291e;
+      border-bottom: 1px solid #28302d;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .close-round-btn {
+      background: rgba(17, 20, 19, 0.85);
+      color: #ffffff;
+      border: 1px solid #3a4440;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      font-size: 1.1rem;
+      cursor: pointer;
+    }
+
+    .cart-items {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .cart-item {
+      display: flex;
+      gap: 0.85rem;
+      background-color: #121614;
+      padding: 0.75rem;
+      border-radius: 8px;
+      border: 1px solid #28302d;
+      align-items: center;
+    }
+
+    .cart-item img {
+      width: 62px;
+      height: 62px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+
+    .cart-item-info {
+      flex: 1;
+    }
+
+    .cart-item-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .cart-item-variant {
+      font-size: 0.74rem;
+      color: #8f9c96;
+      margin-bottom: 0.15rem;
+    }
+
+    .cart-item-price {
+      font-size: 0.82rem;
+      color: #c9a24d;
+      font-weight: 600;
+    }
+
+    .qty-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      margin-top: 0.35rem;
+    }
+
+    .qty-btn {
+      background-color: #262e2b;
+      color: #ffffff;
+      border: none;
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .remove-btn {
+      background: none;
+      border: none;
+      color: #f87171;
+      font-size: 0.78rem;
+      cursor: pointer;
+      margin-left: auto;
+    }
+
+    .cart-footer {
+      padding: 1.1rem 1.25rem;
+      border-top: 1px solid #28302d;
+      background-color: #141817;
+    }
+
+    .promo-row {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .promo-row input {
+      flex: 1;
+      padding: 0.48rem 0.7rem;
+      border-radius: 6px;
+      border: 1px solid #2e3834;
+      background-color: #111413;
+      color: #ffffff;
+      font-size: 0.82rem;
+    }
+
+    .promo-row button {
+      background-color: #0f3829;
+      color: #c9a24d;
+      border: 1px solid #1f6e51;
+      padding: 0.48rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .summary-line {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.84rem;
+      color: #9ba8a2;
+      margin-bottom: 0.25rem;
+    }
+
+    .cart-total-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 1.08rem;
+      font-weight: 700;
+      margin: 0.5rem 0 0.85rem;
+      padding-top: 0.5rem;
+      border-top: 1px solid #28302d;
+    }
+
+    .checkout-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .checkout-form input,
+    .checkout-form select {
+      padding: 0.52rem 0.75rem;
+      border-radius: 6px;
+      border: 1px solid #2e3834;
+      background-color: #111413;
+      color: #ffffff;
+      font-size: 0.85rem;
+    }
+
+    .checkout-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.6rem;
+    }
+
+    .sim-checkout-btn {
+      padding: 0.75rem;
+      background-color: #c9a24d;
+      color: #111413;
+      border: none;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.88rem;
+      cursor: pointer;
+    }
+
+    .sim-checkout-btn:hover {
+      background-color: #dbb562;
+    }
+
+    .wa-checkout-btn {
+      padding: 0.75rem;
+      background-color: #25d366;
+      color: #0b141a;
+      border: none;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.88rem;
+      cursor: pointer;
+    }
+
+    .wa-checkout-btn:hover {
+      background-color: #2fe072;
+    }
+
+    /* Modal Invoice Simulasi */
+    .invoice-card {
+      background-color: #191e1c;
+      border: 1px solid #c9a24d;
+      border-radius: 12px;
+      max-width: 520px;
+      width: 100%;
+      padding: 1.75rem;
+      position: relative;
+    }
+
+    .invoice-header {
+      text-align: center;
+      padding-bottom: 1rem;
+      border-bottom: 1px dashed #2e3834;
+      margin-bottom: 1rem;
+    }
+
+    .invoice-badge {
+      display: inline-block;
+      background-color: #0f3829;
+      color: #6ee7b7;
+      border: 1px solid #1f6e51;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      margin-bottom: 0.5rem;
+    }
+
+    .invoice-list {
+      font-size: 0.86rem;
+      color: #cbd5d0;
+      margin-bottom: 1rem;
+      max-height: 180px;
+      overflow-y: auto;
+    }
+
+    .invoice-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.35rem 0;
+      border-bottom: 1px solid #222926;
+    }
+
+    /* Toast Notifikasi */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #0b291e;
+      color: #ffffff;
+      border: 1px solid #c9a24d;
+      padding: 0.7rem 1.25rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      z-index: 300;
+      display: none;
+    }
+
+    .toast.show {
+      display: block;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #0c0f0e;
+      padding: 2.5rem 0 1.5rem;
+      color: #7d8a84;
+      font-size: 0.88rem;
+    }
+
+    .footer-grid {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 2rem;
+      padding-bottom: 1.75rem;
+      border-bottom: 1px solid #1e2422;
+    }
+
+    .footer-brand {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-brand span {
+      color: #c9a24d;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 1.25rem;
+      font-size: 0.8rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero-grid,
+      .detail-grid,
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 0 1.1rem;
+      }
+      .top-bar-right {
+        display: none;
+      }
+      .checkout-actions {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="top-bar">
+    <div class="container top-bar-inner">
+      <div>Showroom Jakarta: +62 812-3456-7890</div>
+      <div>Katalog Resmi 30 Tongkat Billiard Custom — <span class="top-highlight">Kode Promo: PROSTROKE10 (Diskon 10%)</span></div>
+      <div class="top-bar-right" aria-hidden="true">
+        <span class="social-dot">IG</span>
+        <span class="social-dot">WA</span>
+        <span class="social-dot">YT</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="container header-container">
+      <a class="brand" onclick="navigateHome()">
+        <svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true">
+          <circle cx="16" cy="16" r="15" fill="#111" stroke="#c9a24d" stroke-width="2"/>
+          <circle cx="16" cy="16" r="6" fill="#fff"/>
+          <text x="16" y="19.5" text-anchor="middle" font-size="10" font-weight="bold" fill="#111" font-family="sans-serif">8</text>
+        </svg>
+        <div class="brand-title">PROSTROKE <span>BILLIARD</span></div>
+      </a>
+      <div class="nav-right">
+        <ul class="nav-list">
+          <li><a id="nav-home" class="active" onclick="navigateHome()">Beranda</a></li>
+          <li><a id="nav-cat" onclick="scrollToSection('kategori-pilihan')">Kategori</a></li>
+          <li><a id="nav-catalog" onclick="scrollToSection('katalog')">Katalog</a></li>
+          <li><a onclick="scrollToSection('kontak')">Kontak</a></li>
+        </ul>
+        <div class="header-actions">
+          <button class="icon-action-btn" id="fav-filter-btn" type="button" title="Tampilkan Produk Favorit">
+            &#9829; <span id="fav-count">0</span>
+          </button>
+          <button class="cart-btn" id="open-cart-btn" type="button">
+            Keranjang <span class="cart-count" id="cart-count">0</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Ticker / Marquee Strip -->
+  <div class="ticker-strip" aria-hidden="true">
+    <div class="ticker-track">
+      <span class="ticker-item">Custom Play Cue</span>
+      <span class="ticker-item">•</span>
+      <span class="ticker-item">Pro Series Low Deflection</span>
+      <span class="ticker-item">•</span>
+      <span class="ticker-item">Collector Inlay Ebony</span>
+      <span class="ticker-item">•</span>
+      <span class="ticker-item">Carbon &amp; Canadian Maple</span>
+      <span class="ticker-item">•</span>
+      <span class="ticker-item">Radial &amp; Uni-Loc Joint</span>
+      <span class="ticker-item">•</span>
+      <span class="ticker-item">Gratis Packing Pipa PVC</span>
+      <span class="ticker-item">•</span>
+      <span class="ticker-item">Custom Play Cue</span>
+      <span class="ticker-item">•</span>
+      <span class="ticker-item">Pro Series Low Deflection</span>
+      <span class="ticker-item">•</span>
+      <span class="ticker-item">Collector Inlay Ebony</span>
+      <span class="ticker-item">•</span>
+      <span class="ticker-item">Carbon &amp; Canadian Maple</span>
+      <span class="ticker-item">•</span>
+      <span class="ticker-item">Radial &amp; Uni-Loc Joint</span>
+      <span class="ticker-item">•</span>
+      <span class="ticker-item">Gratis Packing Pipa PVC</span>
+      <span class="ticker-item">•</span>
+    </div>
+  </div>
+
+  <!-- VIEW 1: BERANDA & KATALOG -->
+  <div id="home-view">
+    <!-- Hero Banner 2 Kolom -->
+    <section class="hero" id="beranda">
+      <div class="container hero-grid">
+        <div>
+          <div class="hero-badge">
+            <span class="hero-badge-dot"></span>
+            Katalog Custom 2026 &bull; Siap Kirim Seluruh Indonesia
+          </div>
+          <h1>Koleksi Tongkat Billiard <span>Custom &amp; Presisi</span></h1>
+          <p>Belanja tongkat billiard custom pilihan berbahan kayu Canadian Maple, Ebony, Ash, hingga Carbon Fiber dengan kalibrasi kelurusan &amp; keseimbangan presisi untuk performa terbaik.</p>
+          <div class="hero-actions">
+            <a href="#katalog" class="hero-cta">Belanja Sekarang</a>
+            <a href="#kategori-pilihan" class="hero-cta-outline">Jelajahi Kategori</a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat-item">
+              <strong>30+</strong>
+              <span>Varian Cue Custom</span>
+            </div>
+            <div class="stat-item">
+              <strong>100%</strong>
+              <span>QC Kelurusan &amp; Balance</span>
+            </div>
+            <div class="stat-item">
+              <strong>4.9 &#9733;</strong>
+              <span>Rating Pemain Pro</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Spotlight Product Card -->
+        <div class="hero-spotlight" id="spotlight-card"></div>
+      </div>
+    </section>
+
+    <!-- Kategori Pilihan -->
+    <section class="category-section" id="kategori-pilihan">
+      <div class="container">
+        <div class="section-header">
+          <h2>Jelajahi Kategori</h2>
+          <span>Klik kategori untuk memfilter katalog</span>
+        </div>
+        <div class="category-grid" id="category-cards-container"></div>
+      </div>
+    </section>
+
+    <!-- Katalog Produk -->
+    <main id="katalog">
+      <div class="container">
+        <div class="controls-bar">
+          <input type="text" id="search-input" class="search-input" placeholder="Cari nama tongkat, bahan kayu, atau tipe joint...">
+          <select id="category-filter" class="filter-select">
+            <option value="all">Semua Kategori</option>
+          </select>
+          <select id="sort-filter" class="filter-select">
+            <option value="default">Urutkan: Default</option>
+            <option value="price-asc">Harga: Terendah</option>
+            <option value="price-desc">Harga: Tertinggi</option>
+            <option value="rating-desc">Rating Tertinggi</option>
+          </select>
+        </div>
+
+        <div class="section-header">
+          <h2>Katalog Produk</h2>
+          <span id="product-count">Menampilkan 30 produk</span>
+        </div>
+
+        <div class="catalog-grid" id="catalog-container"></div>
+      </div>
+    </main>
+  </div>
+
+  <!-- VIEW 2: HALAMAN DETAIL PRODUK (Simulasi Webstore) -->
+  <section class="detail-view" id="detail-view">
+    <div class="container">
+      <div class="breadcrumb-bar">
+        <div class="breadcrumb" id="detail-breadcrumb"></div>
+        <button class="back-btn" type="button" onclick="navigateHome()">&larr; Kembali ke Katalog</button>
+      </div>
+
+      <div class="detail-grid">
+        <div>
+          <div class="detail-gallery-box">
+            <img id="detail-img" src="" alt="">
+          </div>
+          <div class="detail-spec-boxes" id="detail-spec-boxes"></div>
+        </div>
+
+        <div>
+          <span class="detail-cat-pill" id="detail-category"></span>
+          <h1 class="detail-title" id="detail-name"></h1>
+          <div class="detail-rating-row">
+            <span id="detail-rating" style="color:#fcd34d; font-weight:700;"></span>
+            <span id="detail-status" style="color:#6ee7b7; font-weight:600;"></span>
+          </div>
+
+          <div class="detail-price-box">
+            <span class="detail-price" id="detail-price"></span>
+            <span class="detail-old-price" id="detail-old-price"></span>
+          </div>
+
+          <p id="detail-desc" style="color:#cbd5d0; margin-bottom:1.25rem; font-size:0.95rem;"></p>
+
+          <!-- Pilihan Varian (Chip Selector) -->
+          <div class="variant-group">
+            <span class="variant-label">Pilih Diameter Tip:</span>
+            <div class="chip-row" id="tip-chips"></div>
+          </div>
+
+          <div class="variant-group">
+            <span class="variant-label">Pilih Berat Tongkat:</span>
+            <div class="chip-row" id="weight-chips"></div>
+          </div>
+
+          <div class="variant-group">
+            <span class="variant-label">Paket Perlindungan &amp; Aksesoris:</span>
+            <div class="chip-row" id="package-chips"></div>
+          </div>
+
+          <div class="detail-buy-row">
+            <div class="detail-qty-box">
+              <button type="button" onclick="changeDetailQty(-1)">-</button>
+              <span id="detail-qty">1</span>
+              <button type="button" onclick="changeDetailQty(1)">+</button>
+            </div>
+            <button class="btn-gold-lg" type="button" id="detail-add-cart-btn">+ Tambah ke Keranjang</button>
+            <button class="btn-green-lg" type="button" id="detail-buy-now-btn">Beli Sekarang</button>
+          </div>
+
+          <div class="detail-notice">
+            <strong>Jaminan Kualitas ProStroke:</strong> Setiap pengiriman dilengkapi pelindung joint protector dan pipa PVC anti-bentur. Garansi tukar baru jika shaft melengkung saat diterima.
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabs Informasi Detail -->
+      <div class="tabs-wrapper">
+        <div class="tabs-header">
+          <button class="tab-btn active" type="button" onclick="switchDetailTab('desc', this)">Deskripsi &amp; Keunggulan</button>
+          <button class="tab-btn" type="button" onclick="switchDetailTab('specs', this)">Spesifikasi Teknis</button>
+          <button class="tab-btn" type="button" onclick="switchDetailTab('care', this)">Panduan Perawatan</button>
+        </div>
+
+        <div class="tab-panel active" id="tab-desc">
+          <p id="tab-desc-text"></p>
+          <ul class="checklist">
+            <li>Keseimbangan titik berat (balance point) terkalibrasi untuk kontrol cue ball yang stabil.</li>
+            <li>Finishing gloss high-uv tahan lembap serta wrap ergonomis anti-selip saat tangan berkeringat.</li>
+            <li>Sudah melalui uji rolling di atas meja marmer datar sebelum dikemas.</li>
+          </ul>
+        </div>
+
+        <div class="tab-panel" id="tab-specs">
+          <ul class="checklist" id="tab-specs-list"></ul>
+        </div>
+
+        <div class="tab-panel" id="tab-care">
+          <p>Agar kayu Maple/Ebony atau Carbon Fiber tetap lurus dan awet bertahun-tahun:</p>
+          <ul class="checklist">
+            <li>Simpan tongkat secara vertikal (digantung) atau di dalam hardcase yang kering, hindari bersandar miring ke dinding.</li>
+            <li>Hindari suhu ekstrem (jangan tinggalkan tongkat di bagasi mobil yang terik).</li>
+            <li>Bersihkan shaft secara berkala dengan kain microfiber kering tanpa cairan berbahan alkohol keras.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Produk Terkait -->
+      <div class="section-header">
+        <h2>Produk Terkait Lainnya</h2>
+        <span>Rekomendasi seri serupa untuk Anda</span>
+      </div>
+      <div class="catalog-grid" id="related-container"></div>
+    </div>
+  </section>
+
+  <!-- Strip Keunggulan Layanan -->
+  <section class="features-strip">
+    <div class="container features-grid">
+      <div class="feature-item">
+        <div class="feature-icon">&#128230;</div>
+        <div>
+          <h3>Packing Pipa PVC Berlapis</h3>
+          <p>Dikemas aman menggunakan bubble wrap &amp; pipa tebal agar tongkat tetap lurus sampai tujuan.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">&#9989;</div>
+        <div>
+          <h3>Kalibrasi Lurus 100%</h3>
+          <p>Setiap butt dan shaft melewati uji putar presisi dan kontrol kualitas sebelum pengiriman.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">&#127921;</div>
+        <div>
+          <h3>Konsultasi Tip &amp; Joint</h3>
+          <p>Gratis konsultasi pemilihan diameter tip, berat oz, hingga jenis wrap sesuai gaya main Anda.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="kontak">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">PROSTROKE <span>BILLIARD</span></div>
+          <p>Jl. Sudirman No. 88, Jakarta Pusat</p>
+          <p>Spesialis Tongkat Billiard Custom, Carbon Shaft &amp; Aksesoris Meja Pool.</p>
+        </div>
+        <div>
+          <p><strong>WhatsApp Order:</strong> +62 812-3456-7890</p>
+          <p><strong>Email Toko:</strong> cs@prostrokebilliard.id</p>
+          <p><strong>Jam Showroom:</strong> Setiap Hari, 10.00 - 21.00 WIB</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2026 ProStroke Billiard. Seluruh hak cipta dilindungi.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Drawer Keranjang Belanja -->
+  <div class="cart-drawer-overlay" id="cart-drawer-overlay">
+    <div class="cart-drawer">
+      <div class="cart-header">
+        <h3 style="color:#ffffff;">Keranjang Belanja</h3>
+        <button class="close-round-btn" id="close-cart-btn" type="button">&times;</button>
+      </div>
+      <div class="cart-items" id="cart-items-container"></div>
+      <div class="cart-footer">
+        <div class="promo-row">
+          <input type="text" id="promo-input" placeholder="Kode promo (coba: PROSTROKE10)">
+          <button type="button" id="apply-promo-btn">Pakai</button>
+        </div>
+        <div class="summary-line">
+          <span>Subtotal</span>
+          <span id="cart-subtotal">Rp 0</span>
+        </div>
+        <div class="summary-line" id="discount-row" style="display:none; color:#6ee7b7;">
+          <span>Diskon Promo (10%)</span>
+          <span id="cart-discount">-Rp 0</span>
+        </div>
+        <div class="summary-line">
+          <span>Biaya Pengiriman</span>
+          <span id="cart-shipping">Gratis</span>
+        </div>
+        <div class="cart-total-row">
+          <span>Total Bayar</span>
+          <span id="cart-total" style="color:#c9a24d;">Rp 0</span>
+        </div>
+        <div class="checkout-form">
+          <input type="text" id="buyer-name" placeholder="Nama Lengkap Anda">
+          <input type="text" id="buyer-address" placeholder="Alamat Pengiriman Lengkap">
+          <select id="shipping-method">
+            <option value="0">Packing Pipa PVC Reguler (Gratis)</option>
+            <option value="75000">Express Hardcase Priority (+Rp 75.000)</option>
+          </select>
+        </div>
+        <div class="checkout-actions">
+          <button class="sim-checkout-btn" id="sim-checkout-btn" type="button">
+            Proses Pesanan
+          </button>
+          <button class="wa-checkout-btn" id="wa-checkout-btn" type="button">
+            Order via WhatsApp
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Simulasi Invoice Pesanan -->
+  <div class="modal-overlay" id="invoice-modal">
+    <div class="invoice-card">
+      <button class="close-round-btn" id="close-invoice-btn" type="button" style="position:absolute; top:12px; right:12px;">&times;</button>
+      <div class="invoice-header">
+        <span class="invoice-badge">&#10003; Simulasi Pesanan Berhasil</span>
+        <h3 style="color:#ffffff; margin-bottom:0.2rem;">Terima Kasih, <span id="inv-buyer-name"></span>!</h3>
+        <p style="font-size:0.8rem; color:#8f9c96;">No. Invoice: <strong id="inv-number" style="color:#c9a24d;"></strong></p>
+      </div>
+      <div class="invoice-list" id="inv-items"></div>
+      <div style="font-size:0.85rem; color:#9ba8a2; margin-bottom:1rem;">
+        <div><strong>Alamat:</strong> <span id="inv-address"></span></div>
+        <div><strong>Pengiriman:</strong> <span id="inv-shipping"></span></div>
+      </div>
+      <div class="cart-total-row" style="margin-bottom:1rem;">
+        <span>Total Pembayaran</span>
+        <span id="inv-total" style="color:#c9a24d;"></span>
+      </div>
+      <button class="btn-gold-lg" type="button" style="width:100%;" onclick="finishSimulatedOrder()">
+        Selesai &amp; Lanjut Belanja
+      </button>
+    </div>
+  </div>
+
+  <!-- Toast Notifikasi -->
+  <div class="toast" id="toast">Produk ditambahkan ke keranjang!</div>
+
+  <script>
+    const imageFolder = "Tongkat Billiard";
+    const storeWhatsApp = "6281234567890";
+
+    const billiardCues = [
+      { image: "Custom_billiard_cue_02ce6446.jpg", category: "Custom Play Cue", name: "Vortex Custom Series 01", specs: "Tip: 12.5mm | Berat: 19 oz | Joint: Radial | Bahan: Canadian Maple", price: 4500000, oldPrice: 4950000, rating: 4.9, status: "Tersedia", limited: false },
+      { image: "Custom_billiard_cue_449213b8.jpg", category: "Custom Play Cue", name: "Royal Inlay Maple 02", specs: "Tip: 12.4mm | Berat: 19.2 oz | Joint: Uni-Loc | Bahan: Hard Maple & Ebony", price: 5200000, oldPrice: null, rating: 4.8, status: "Tersedia", limited: false },
+      { image: "Custom_billiard_cue_c4261d68.jpg", category: "Custom Play Cue", name: "Obsidian Point Cue 03", specs: "Tip: 12.5mm | Berat: 19 oz | Joint: 3/8x10 | Inlay: Turquoise & Maple", price: 5850000, oldPrice: 6300000, rating: 5.0, status: "Stok Terbatas", limited: true },
+      { image: "Custom_billiard_cue_catalog_photo_3a62e815.jpg", category: "Pro Series Cue", name: "Apex Catalog Edition 04", specs: "Tip: 12.25mm | Berat: 18.8 oz | Joint: Radial | Low Deflection Shaft", price: 6100000, oldPrice: null, rating: 4.9, status: "Tersedia", limited: false },
+      { image: "Custom_billiard_cue_catalog_photo_dd25ab0f.jpg", category: "Pro Series Cue", name: "Grandmaster Gold 05", specs: "Tip: 12.5mm | Berat: 19.5 oz | Joint: 5/16x14 | Bahan: Rosewood & Maple", price: 4900000, oldPrice: 5400000, rating: 4.8, status: "Tersedia", limited: false },
+      { image: "Custom_billiard_cue_displayed_1dd74f5e.jpg", category: "Collector Cue", name: "Heritage Display 06", specs: "Tip: 12.75mm | Berat: 19 oz | Joint: Brass Pin | Linen Wrap Classic", price: 6750000, oldPrice: null, rating: 5.0, status: "Stok Terbatas", limited: true },
+      { image: "Custom_billiard_cue_displayed_5166e83f.jpg", category: "Collector Cue", name: "Sovereign Wrap 07", specs: "Tip: 12.5mm | Berat: 19.3 oz | Joint: Uni-Loc | Leather Grip", price: 5400000, oldPrice: null, rating: 4.8, status: "Tersedia", limited: false },
+      { image: "Custom_billiard_cue_displayed_b7118a8b.jpg", category: "Collector Cue", name: "Emerald Crown 08", specs: "Tip: 12.4mm | Berat: 19 oz | Joint: Radial | Green Veneer Inlay", price: 6300000, oldPrice: 6850000, rating: 4.9, status: "Tersedia", limited: false },
+      { image: "Custom_billiard_cue_for_catalog_08e04600.jpg", category: "Carbon & Maple", name: "Stealth Strike 09", specs: "Tip: 12.4mm | Berat: 19 oz | Joint: Quick Release | Carbon Core", price: 7100000, oldPrice: null, rating: 5.0, status: "Tersedia", limited: false },
+      { image: "Custom_billiard_cue_for_catalog_0e081528.jpg", category: "Classic Play Cue", name: "Mahogany Precision 10", specs: "Tip: 12.75mm | Berat: 19.5 oz | Joint: 5/16x18 | Bahan: Mahogany", price: 3750000, oldPrice: 4100000, rating: 4.7, status: "Tersedia", limited: false },
+      { image: "Custom_billiard_cue_for_catalog_1ea1f7d3.jpg", category: "Custom Play Cue", name: "Silver Ring Custom 11", specs: "Tip: 12.5mm | Berat: 19 oz | Joint: Radial | Silver Ring Accent", price: 4650000, oldPrice: null, rating: 4.8, status: "Tersedia", limited: false },
+      { image: "Custom_billiard_cue_for_catalog_22fa7ef1.jpg", category: "Custom Play Cue", name: "Imperial 6-Point 12", specs: "Tip: 12.5mm | Berat: 19.2 oz | Joint: 3/8x10 | 6-Point Sharp Inlay", price: 5950000, oldPrice: null, rating: 4.9, status: "Stok Terbatas", limited: true },
+      { image: "Custom_billiard_cue_for_catalog_2ebb5a70.jpg", category: "Break / Play Cue", name: "Titan Force 13", specs: "Tip: 13.0mm | Berat: 20 oz | Joint: Uni-Loc | Heavy Hitter", price: 4300000, oldPrice: 4700000, rating: 4.8, status: "Tersedia", limited: false },
+      { image: "Custom_billiard_cue_for_catalog_326eb45a.jpg", category: "Classic Play Cue", name: "Amber Wood Cue 14", specs: "Tip: 12.5mm | Berat: 19 oz | Joint: 5/16x14 | Bahan: Curly Maple", price: 4800000, oldPrice: null, rating: 4.7, status: "Tersedia", limited: false },
+      { image: "Custom_billiard_cue_for_catalog_38b33cce.jpg", category: "Pro Series Cue", name: "Mirage Pro Line 15", specs: "Tip: 12.25mm | Berat: 18.9 oz | Joint: Radial | Pro Taper Shaft", price: 5600000, oldPrice: null, rating: 4.9, status: "Tersedia", limited: false },
+      { image: "Custom_billiard_cue_for_catalog_3b8ba64a.jpg", category: "Custom Play Cue", name: "Crimson Edge 16", specs: "Tip: 12.5mm | Berat: 19 oz | Joint: Uni-Loc | Red Veneer & Ebony", price: 5350000, oldPrice: null, rating: 4.8, status: "Tersedia", limited: false },
+      { image: "Custom_billiard_cue_for_catalog_4c6fa4a6.jpg", category: "Collector Cue", name: "Artisan Ivory-Style 17", specs: "Tip: 12.4mm | Berat: 19.1 oz | Joint: 3/8x10 | Handcrafted Inlay", price: 7400000, oldPrice: 7900000, rating: 5.0, status: "Stok Terbatas", limited: true },
+      { image: "Custom_billiard_cue_for_catalog_58994981.jpg", category: "Classic Play Cue", name: "Nordic Ash Cue 18", specs: "Tip: 12.5mm | Berat: 18.5 oz | Joint: Brass | Bahan: Selected Ash", price: 3550000, oldPrice: null, rating: 4.7, status: "Tersedia", limited: false },
+      { image: "Custom_billiard_cue_for_catalog_86b7dce7.jpg", category: "Carbon & Maple", name: "Shadow Carbon 19", specs: "Tip: 12.4mm | Berat: 19 oz | Joint: Radial | Full Carbon Matte", price: 6900000, oldPrice: null, rating: 5.0, status: "Tersedia", limited: false },
+      { image: "Custom_billiard_cue_for_catalog_a2b68c65.jpg", category: "Custom Play Cue", name: "Billiard Prestige 20", specs: "Tip: 12.5mm | Berat: 19.4 oz | Joint: 5/16x18 | Irish Linen Wrap", price: 4450000, oldPrice: null, rating: 4.8, status: "Tersedia", limited: false },
+      { image: "Custom_billiard_cue_for_catalog_b0b1cef0.jpg", category: "Pro Series Cue", name: "Velocity Tournament 21", specs: "Tip: 12.25mm | Berat: 19 oz | Joint: Uni-Loc | Low Deflection", price: 5750000, oldPrice: 6200000, rating: 4.9, status: "Tersedia", limited: false },
+      { image: "Custom_billiard_cue_for_catalog_b2ab08f5.jpg", category: "Custom Play Cue", name: "Golden Crest 22", specs: "Tip: 12.5mm | Berat: 19.2 oz | Joint: Radial | Gold Ring & Maple", price: 5150000, oldPrice: null, rating: 4.8, status: "Tersedia", limited: false },
+      { image: "Custom_billiard_cue_for_catalog_c14de881.jpg", category: "Collector Cue", name: "Monarch 8-Point 23", specs: "Tip: 12.4mm | Berat: 19 oz | Joint: 3/8x10 | Cocobolo & Ebony", price: 6600000, oldPrice: null, rating: 4.9, status: "Stok Terbatas", limited: true },
+      { image: "Custom_billiard_cue_on_background_1a1ff74c.jpg", category: "Studio Edition", name: "Midnight Velvet 24", specs: "Tip: 12.5mm | Berat: 19 oz | Joint: Uni-Loc | Textured Leather Grip", price: 4950000, oldPrice: null, rating: 4.8, status: "Tersedia", limited: false },
+      { image: "Custom_billiard_cue_on_background_89060ad2.jpg", category: "Studio Edition", name: "Walnut Classic 25", specs: "Tip: 12.75mm | Berat: 19.5 oz | Joint: 5/16x14 | Bahan: Dark Walnut", price: 3900000, oldPrice: 4250000, rating: 4.7, status: "Tersedia", limited: false },
+      { image: "Custom_billiard_cue_on_background_a14b26b1.jpg", category: "Studio Edition", name: "Cobalt Strike 26", specs: "Tip: 12.4mm | Berat: 19 oz | Joint: Radial | Blue Pearl Inlay", price: 5450000, oldPrice: null, rating: 4.9, status: "Tersedia", limited: false },
+      { image: "Custom_billiard_cue_on_background_a8b1883c.jpg", category: "Studio Edition", name: "Zenith Maple Pro 27", specs: "Tip: 12.5mm | Berat: 18.8 oz | Joint: 3/8x10 | AAA Birdseye Maple", price: 5800000, oldPrice: null, rating: 4.9, status: "Tersedia", limited: false },
+      { image: "Custom_billiard_cue_on_background_edc20a43.jpg", category: "Studio Edition", name: "Onyx & Brass 28", specs: "Tip: 12.5mm | Berat: 19.2 oz | Joint: Brass Pin | Sleek Black Finish", price: 4700000, oldPrice: null, rating: 4.8, status: "Tersedia", limited: false },
+      { image: "Custom_billiard_cue_photorealist._75336355.jpg", category: "Signature Series", name: "Masterpiece Signature 29", specs: "Tip: 12.25mm | Berat: 19 oz | Joint: Radial | Limited Custom Build", price: 7800000, oldPrice: 8500000, rating: 5.0, status: "Stok Terbatas", limited: true },
+      { image: "Custom_billiard_cue_photo_8e3036ea.jpg", category: "Signature Series", name: "Champion Legacy 30", specs: "Tip: 12.5mm | Berat: 19.3 oz | Joint: Uni-Loc | Pro Balance Weight", price: 6200000, oldPrice: null, rating: 4.9, status: "Tersedia", limited: false }
+    ];
+
+    // State Aplikasi
+    let cart = [];
+    let favorites = [];
+    let onlyFavorites = false;
+    let promoDiscountRate = 0;
+
+    try {
+      cart = JSON.parse(localStorage.getItem("prostroke_cart") || "[]");
+      favorites = JSON.parse(localStorage.getItem("prostroke_favs") || "[]");
+    } catch (e) {
+      cart = [];
+      favorites = [];
+    }
+
+    // State Halaman Detail
+    let activeDetailIdx = 0;
+    let detailQty = 1;
+    let selectedTip = "12.5 mm";
+    let selectedWeight = "19.0 oz";
+    let selectedPackageExtra = 0;
+    let selectedPackageName = "Standard Softcase";
+
+    function saveState() {
+      try {
+        localStorage.setItem("prostroke_cart", JSON.stringify(cart));
+        localStorage.setItem("prostroke_favs", JSON.stringify(favorites));
+      } catch (e) {}
+    }
+
+    function formatRupiah(angka) {
+      return "Rp " + angka.toLocaleString("id-ID");
+    }
+
+    function handleImgError(imgEl, originalFile) {
+      const step = parseInt(imgEl.dataset.fallbackStep || "0", 10);
+      if (step === 0 && originalFile.includes("._")) {
+        imgEl.dataset.fallbackStep = "1";
+        imgEl.src = `${imageFolder}/${originalFile.replace("._", "_")}`;
+      } else if (step <= 1) {
+        imgEl.dataset.fallbackStep = "2";
+        imgEl.src = `${imageFolder}/${originalFile.replace(/\.jpg$/i, ".png")}`;
+      } else if (step <= 2) {
+        imgEl.dataset.fallbackStep = "3";
+        imgEl.src = `${imageFolder}/Custom_billiard_cue_photo_8e3036ea.jpg`;
+      } else {
+        imgEl.onerror = null;
+      }
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById("toast");
+      toast.textContent = msg;
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 2200);
+    }
+
+    // Navigasi Beranda vs Halaman Detail
+    function navigateHome() {
+      document.getElementById("detail-view").classList.remove("active");
+      document.getElementById("home-view").style.display = "block";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function scrollToSection(id) {
+      if (document.getElementById("home-view").style.display === "none") {
+        document.getElementById("detail-view").classList.remove("active");
+        document.getElementById("home-view").style.display = "block";
+      }
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      }, 60);
+    }
+
+    // Render Spotlight Produk Unggulan (Hero)
+    function renderSpotlight() {
+      const spotIdx = 28; // Masterpiece Signature 29
+      const cue = billiardCues[spotIdx];
+      document.getElementById("spotlight-card").innerHTML = `
+        <div onclick="openProductDetail(${spotIdx})">
+          <div class="spotlight-top">
+            <span class="spotlight-label">Spotlight Unggulan</span>
+            <span style="font-size:0.82rem; color:#fcd34d; font-weight:700;">&#9733; ${cue.rating.toFixed(1)}</span>
+          </div>
+          <div class="spotlight-img-box">
+            <img src="${imageFolder}/${cue.image}" alt="${cue.name}" onerror="handleImgError(this, '${cue.image}')">
+          </div>
+          <div class="product-category">${cue.category}</div>
+          <div class="spotlight-name">${cue.name}</div>
+          <div class="spotlight-meta">${cue.specs}</div>
+          <div class="spotlight-bottom">
+            <div>
+              <strong style="color:#c9a24d; font-size:1.15rem;">${formatRupiah(cue.price)}</strong>
+              ${cue.oldPrice ? `<span class="product-old-price">${formatRupiah(cue.oldPrice)}</span>` : ""}
+            </div>
+            <span style="font-size:0.82rem; font-weight:700; color:#ffffff;">Lihat Detail &rarr;</span>
+          </div>
+        </div>
+      `;
+    }
+
+    // Render Kategori Pilihan
+    function renderCategories() {
+      const catMap = new Map();
+      billiardCues.forEach(cue => {
+        if (!catMap.has(cue.category)) {
+          catMap.set(cue.category, { name: cue.category, count: 0, image: cue.image });
+        }
+        catMap.get(cue.category).count += 1;
+      });
+
+      const select = document.getElementById("category-filter");
+      const currentCat = select.value;
+      const cardsContainer = document.getElementById("category-cards-container");
+
+      cardsContainer.innerHTML = Array.from(catMap.values()).map(cat => `
+        <div class="cat-card ${currentCat === cat.name ? "active" : ""}" onclick="selectCategory('${cat.name}')">
+          <div class="cat-thumb">
+            <img src="${imageFolder}/${cat.image}" alt="${cat.name}" onerror="handleImgError(this, '${cat.image}')">
+          </div>
+          <div class="cat-info">
+            <h3>${cat.name}</h3>
+            <span>${cat.count} Produk</span>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function selectCategory(catName) {
+      const select = document.getElementById("category-filter");
+      select.value = (select.value === catName) ? "all" : catName;
+      onlyFavorites = false;
+      document.getElementById("fav-filter-btn").classList.remove("active");
+      renderCategories();
+      renderCatalog();
+      scrollToSection("katalog");
+    }
+
+    // Render Katalog
+    function renderCatalog() {
+      const container = document.getElementById("catalog-container");
+      const countLabel = document.getElementById("product-count");
+      const keyword = document.getElementById("search-input").value.toLowerCase().trim();
+      const selectedCat = document.getElementById("category-filter").value;
+      const sortMode = document.getElementById("sort-filter").value;
+
+      let filtered = billiardCues
+        .map((cue, idx) => ({ ...cue, idx }))
+        .filter(cue => {
+          const matchCat = selectedCat === "all" || cue.category === selectedCat;
+          const matchFav = !onlyFavorites || favorites.includes(cue.idx);
+          const matchText =
+            cue.name.toLowerCase().includes(keyword) ||
+            cue.specs.toLowerCase().includes(keyword) ||
+            cue.category.toLowerCase().includes(keyword);
+          return matchCat && matchFav && matchText;
+        });
+
+      if (sortMode === "price-asc") filtered.sort((a, b) => a.price - b.price);
+      if (sortMode === "price-desc") filtered.sort((a, b) => b.price - a.price);
+      if (sortMode === "rating-desc") filtered.sort((a, b) => b.rating - a.rating);
+
+      countLabel.textContent = onlyFavorites
+        ? `Menampilkan ${filtered.length} produk favorit`
+        : `Menampilkan ${filtered.length} produk`;
+
+      if (filtered.length === 0) {
+        container.innerHTML = `<p style="color:#9ba8a2; grid-column:1/-1;">Produk tidak ditemukan. Coba ubah kata kunci atau filter kategori.</p>`;
+        return;
+      }
+
+      container.innerHTML = filtered.map(cue => createProductCardHTML(cue)).join("");
+    }
+
+    function createProductCardHTML(cue) {
+      const badgeClass = cue.limited ? "stock-badge-float limited" : "stock-badge-float";
+      const isFav = favorites.includes(cue.idx);
+      const imagePath = `${imageFolder}/${cue.image}`;
+
+      return `
+        <article class="product-card">
+          <div class="product-image" onclick="openProductDetail(${cue.idx})">
+            <img src="${imagePath}" alt="${cue.name}" loading="lazy" onerror="handleImgError(this, '${cue.image}')">
+            <button class="fav-float-btn ${isFav ? "active" : ""}" type="button" title="Favorit" onclick="event.stopPropagation(); toggleFavorite(${cue.idx})">&#9829;</button>
+            <span class="${badgeClass}">${cue.status}</span>
+          </div>
+          <div class="product-info">
+            <div class="card-meta-row">
+              <div class="product-category">${cue.category}</div>
+              <div class="product-rating">&#9733; ${cue.rating.toFixed(1)}</div>
+            </div>
+            <h3 class="product-name" onclick="openProductDetail(${cue.idx})">${cue.name}</h3>
+            <p class="product-specs">${cue.specs}</p>
+            <div class="product-footer">
+              <div class="product-price">
+                ${formatRupiah(cue.price)}
+                ${cue.oldPrice ? `<span class="product-old-price">${formatRupiah(cue.oldPrice)}</span>` : ""}
+              </div>
+              <button class="add-cart-btn" type="button" onclick="addToCart(${cue.idx}, 1, 'Standard (12.5mm / 19oz)', 0)">+ Beli</button>
+            </div>
+          </div>
+        </article>
+      `;
+    }
+
+    function toggleFavorite(idx) {
+      if (favorites.includes(idx)) {
+        favorites = favorites.filter(i => i !== idx);
+        showToast("Dihapus dari daftar favorit");
+      } else {
+        favorites.push(idx);
+        showToast("Ditambahkan ke daftar favorit!");
+      }
+      saveState();
+      updateFavUI();
+      renderCatalog();
+    }
+
+    function updateFavUI() {
+      document.getElementById("fav-count").textContent = favorites.length;
+    }
+
+    // Halaman Detail Produk (Simulasi Webstore)
+    function openProductDetail(idx) {
+      activeDetailIdx = idx;
+      detailQty = 1;
+      selectedTip = "12.5 mm";
+      selectedWeight = "19.0 oz";
+      selectedPackageExtra = 0;
+      selectedPackageName = "Standard Softcase";
+
+      const cue = billiardCues[idx];
+      const parts = cue.specs.split("|").map(s => s.trim());
+
+      document.getElementById("home-view").style.display = "none";
+      document.getElementById("detail-view").classList.add("active");
+
+      document.getElementById("detail-breadcrumb").innerHTML = `
+        <a onclick="navigateHome()">Beranda</a> <span>/</span>
+        <a onclick="selectCategory('${cue.category}')">${cue.category}</a> <span>/</span>
+        <strong style="color:#ffffff;">${cue.name}</strong>
+      `;
+
+      const imgEl = document.getElementById("detail-img");
+      imgEl.dataset.fallbackStep = "0";
+      imgEl.onerror = function () { handleImgError(this, cue.image); };
+      imgEl.src = `${imageFolder}/${cue.image}`;
+      imgEl.alt = cue.name;
+
+      document.getElementById("detail-spec-boxes").innerHTML = `
+        <div class="spec-mini-box"><span>Diameter Tip</span><strong>${parts[0]?.replace("Tip:", "").trim() || "12.5mm"}</strong></div>
+        <div class="spec-mini-box"><span>Berat Standar</span><strong>${parts[1]?.replace("Berat:", "").trim() || "19 oz"}</strong></div>
+        <div class="spec-mini-box"><span>Tipe Joint</span><strong>${parts[2]?.replace("Joint:", "").trim() || "Radial"}</strong></div>
+      `;
+
+      document.getElementById("detail-category").textContent = cue.category;
+      document.getElementById("detail-name").textContent = cue.name;
+      document.getElementById("detail-rating").textContent = `★ ${cue.rating.toFixed(1)} (Ulasan Terverifikasi)`;
+      document.getElementById("detail-status").textContent = `• ${cue.status}`;
+      document.getElementById("detail-desc").textContent =
+        `${cue.name} adalah tongkat billiard kategori ${cue.category} dengan spesifikasi ${cue.specs}. Dirancang untuk memberikan akurasi pukulan tinggi, minim defleksi, dan feel solid di setiap break maupun play shot.`;
+
+      document.getElementById("detail-qty").textContent = detailQty;
+      updateDetailPrice();
+      renderDetailChips();
+
+      // Isi Tab
+      document.getElementById("tab-desc-text").textContent =
+        `${cue.name} dibuat menggunakan material pilihan yang telah dikeringkan secara alami untuk menjaga stabilitas kayu dan mencegah perubahan bentuk.`;
+      document.getElementById("tab-specs-list").innerHTML = parts.map(p => `<li>${p}</li>`).join("") +
+        `<li>Panjang Standar: 58 Inch (147 cm) 2-Piece</li>`;
+
+      // Produk Terkait
+      const related = billiardCues
+        .map((c, i) => ({ ...c, idx: i }))
+        .filter(c => c.idx !== idx)
+        .sort((a, b) => (a.category === cue.category ? -1 : 1))
+        .slice(0, 4);
+      document.getElementById("related-container").innerHTML = related.map(c => createProductCardHTML(c)).join("");
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function renderDetailChips() {
+      const tips = ["12.25 mm", "12.5 mm", "12.75 mm"];
+      const weights = ["18.5 oz", "19.0 oz", "19.5 oz"];
+      const packages = [
+        { label: "Standard Softcase (+Rp 0)", name: "Standard Softcase", extra: 0 },
+        { label: "+ Hardcase & Chalk (+Rp 250.000)", name: "Hardcase & Chalk", extra: 250000 }
+      ];
+
+      document.getElementById("tip-chips").innerHTML = tips.map(t => `
+        <button type="button" class="chip ${selectedTip === t ? "active" : ""}" onclick="pickTip('${t}')">${t}</button>
+      `).join("");
+
+      document.getElementById("weight-chips").innerHTML = weights.map(w => `
+        <button type="button" class="chip ${selectedWeight === w ? "active" : ""}" onclick="pickWeight('${w}')">${w}</button>
+      `).join("");
+
+      document.getElementById("package-chips").innerHTML = packages.map(p => `
+        <button type="button" class="chip ${selectedPackageName === p.name ? "active" : ""}" onclick="pickPackage('${p.name}', ${p.extra})">${p.label}</button>
+      `).join("");
+    }
+
+    function pickTip(t) { selectedTip = t; renderDetailChips(); }
+    function pickWeight(w) { selectedWeight = w; renderDetailChips(); }
+    function pickPackage(name, extra) {
+      selectedPackageName = name;
+      selectedPackageExtra = extra;
+      renderDetailChips();
+      updateDetailPrice();
+    }
+
+    function updateDetailPrice() {
+      const cue = billiardCues[activeDetailIdx];
+      document.getElementById("detail-price").textContent = formatRupiah(cue.price + selectedPackageExtra);
+      const oldEl = document.getElementById("detail-old-price");
+      if (cue.oldPrice) {
+        oldEl.textContent = formatRupiah(cue.oldPrice + selectedPackageExtra);
+        oldEl.style.display = "inline";
+      } else {
+        oldEl.style.display = "none";
+      }
+    }
+
+    function changeDetailQty(delta) {
+      detailQty = Math.max(1, detailQty + delta);
+      document.getElementById("detail-qty").textContent = detailQty;
+    }
+
+    function switchDetailTab(tabId, btnEl) {
+      document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+      document.querySelectorAll(".tab-panel").forEach(p => p.classList.remove("active"));
+      btnEl.classList.add("active");
+      document.getElementById(`tab-${tabId}`).classList.add("active");
+    }
+
+    // Keranjang Belanja
+    function addToCart(idx, qty = 1, variantLabel = "Standard", extraPrice = 0) {
+      const existing = cart.find(item => item.idx === idx && item.variant === variantLabel);
+      if (existing) {
+        existing.qty += qty;
+      } else {
+        cart.push({ idx, qty, variant: variantLabel, extraPrice });
+      }
+      saveState();
+      updateCartUI();
+      showToast(`${billiardCues[idx].name} ditambahkan ke keranjang!`);
+    }
+
+    function changeCartQty(cartIndex, delta) {
+      if (!cart[cartIndex]) return;
+      cart[cartIndex].qty += delta;
+      if (cart[cartIndex].qty <= 0) {
+        cart.splice(cartIndex, 1);
+      }
+      saveState();
+      updateCartUI();
+    }
+
+    function getCartTotals() {
+      const subtotal = cart.reduce((sum, item) => {
+        const unitPrice = billiardCues[item.idx].price + (item.extraPrice || 0);
+        return sum + unitPrice * item.qty;
+      }, 0);
+      const discount = Math.round(subtotal * promoDiscountRate);
+      const shippingEl = document.getElementById("shipping-method");
+      const shipping = cart.length > 0 && shippingEl ? parseInt(shippingEl.value, 10) : 0;
+      const total = Math.max(0, subtotal - discount + shipping);
+      return { subtotal, discount, shipping, total };
+    }
+
+    function updateCartUI() {
+      const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+      const { subtotal, discount, shipping, total } = getCartTotals();
+
+      document.getElementById("cart-count").textContent = totalQty;
+      document.getElementById("cart-subtotal").textContent = formatRupiah(subtotal);
+
+      const discountRow = document.getElementById("discount-row");
+      if (discount > 0) {
+        discountRow.style.display = "flex";
+        document.getElementById("cart-discount").textContent = "-" + formatRupiah(discount);
+      } else {
+        discountRow.style.display = "none";
+      }
+
+      document.getElementById("cart-shipping").textContent = shipping === 0 ? "Gratis" : formatRupiah(shipping);
+      document.getElementById("cart-total").textContent = formatRupiah(total);
+
+      const container = document.getElementById("cart-items-container");
+      if (cart.length === 0) {
+        container.innerHTML = `<p style="color:#8f9c96; text-align:center; margin-top:2rem;">Keranjang belanja masih kosong.</p>`;
+        return;
+      }
+
+      container.innerHTML = cart.map((item, i) => {
+        const cue = billiardCues[item.idx];
+        const unitPrice = cue.price + (item.extraPrice || 0);
+        return `
+          <div class="cart-item">
+            <img src="${imageFolder}/${cue.image}" alt="${cue.name}" onerror="handleImgError(this, '${cue.image}')">
+            <div class="cart-item-info">
+              <div class="cart-item-title">${cue.name}</div>
+              <div class="cart-item-variant">${item.variant}</div>
+              <div class="cart-item-price">${formatRupiah(unitPrice)}</div>
+              <div class="qty-controls">
+                <button class="qty-btn" type="button" onclick="changeCartQty(${i}, -1)">-</button>
+                <span>${item.qty}</span>
+                <button class="qty-btn" type="button" onclick="changeCartQty(${i}, 1)">+</button>
+                <button class="remove-btn" type="button" onclick="changeCartQty(${i}, -${item.qty})">Hapus</button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function finishSimulatedOrder() {
+      cart = [];
+      promoDiscountRate = 0;
+      document.getElementById("promo-input").value = "";
+      saveState();
+      updateCartUI();
+      document.getElementById("invoice-modal").classList.remove("active");
+      showToast("Pesanan berhasil disimulasikan! Keranjang telah direset.");
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const catSelect = document.getElementById("category-filter");
+      const categories = [...new Set(billiardCues.map(c => c.category))];
+      categories.forEach(cat => {
+        const opt = document.createElement("option");
+        opt.value = cat;
+        opt.textContent = cat;
+        catSelect.appendChild(opt);
+      });
+
+      document.getElementById("search-input").addEventListener("input", renderCatalog);
+      catSelect.addEventListener("change", () => {
+        renderCategories();
+        renderCatalog();
+      });
+      document.getElementById("sort-filter").addEventListener("change", renderCatalog);
+
+      document.getElementById("fav-filter-btn").addEventListener("click", function () {
+        onlyFavorites = !onlyFavorites;
+        this.classList.toggle("active", onlyFavorites);
+        scrollToSection("katalog");
+        renderCatalog();
+      });
+
+      // Detail Buy Buttons
+      document.getElementById("detail-add-cart-btn").addEventListener("click", () => {
+        const variant = `${selectedTip} / ${selectedWeight} / ${selectedPackageName}`;
+        addToCart(activeDetailIdx, detailQty, variant, selectedPackageExtra);
+      });
+
+      document.getElementById("detail-buy-now-btn").addEventListener("click", () => {
+        const variant = `${selectedTip} / ${selectedWeight} / ${selectedPackageName}`;
+        addToCart(activeDetailIdx, detailQty, variant, selectedPackageExtra);
+        document.getElementById("cart-drawer-overlay").classList.add("active");
+      });
+
+      // Cart Drawer Events
+      document.getElementById("open-cart-btn").addEventListener("click", () => {
+        document.getElementById("cart-drawer-overlay").classList.add("active");
+      });
+      document.getElementById("close-cart-btn").addEventListener("click", () => {
+        document.getElementById("cart-drawer-overlay").classList.remove("active");
+      });
+      document.getElementById("cart-drawer-overlay").addEventListener("click", (e) => {
+        if (e.target.id === "cart-drawer-overlay") e.target.classList.remove("active");
+      });
+      document.getElementById("shipping-method").addEventListener("change", updateCartUI);
+
+      // Kode Promo
+      document.getElementById("apply-promo-btn").addEventListener("click", () => {
+        const code = document.getElementById("promo-input").value.trim().toUpperCase();
+        if (code === "PROSTROKE10") {
+          promoDiscountRate = 0.1;
+          showToast("Kode promo PROSTROKE10 berhasil! Diskon 10%.");
+        } else {
+          promoDiscountRate = 0;
+          showToast("Kode promo tidak valid (coba: PROSTROKE10).");
+        }
+        updateCartUI();
+      });
+
+      // Simulasi Checkout (Invoice Modal)
+      document.getElementById("sim-checkout-btn").addEventListener("click", () => {
+        if (cart.length === 0) {
+          showToast("Keranjang masih kosong!");
+          return;
+        }
+        const name = document.getElementById("buyer-name").value.trim() || "Pelanggan ProStroke";
+        const address = document.getElementById("buyer-address").value.trim() || "Jakarta Pusat";
+        const shippingSelect = document.getElementById("shipping-method");
+        const shippingLabel = shippingSelect.options[shippingSelect.selectedIndex].text;
+        const { total } = getCartTotals();
+
+        document.getElementById("inv-buyer-name").textContent = name;
+        document.getElementById("inv-number").textContent = "PS-" + Math.floor(100000 + Math.random() * 900000);
+        document.getElementById("inv-address").textContent = address;
+        document.getElementById("inv-shipping").textContent = shippingLabel;
+        document.getElementById("inv-total").textContent = formatRupiah(total);
+
+        document.getElementById("inv-items").innerHTML = cart.map(item => {
+          const cue = billiardCues[item.idx];
+          const lineTotal = (cue.price + (item.extraPrice || 0)) * item.qty;
+          return `
+            <div class="invoice-row">
+              <span>${cue.name} (${item.qty}x) <br><small style="color:#8f9c96;">${item.variant}</small></span>
+              <strong style="color:#ffffff;">${formatRupiah(lineTotal)}</strong>
+            </div>
+          `;
+        }).join("");
+
+        document.getElementById("cart-drawer-overlay").classList.remove("active");
+        document.getElementById("invoice-modal").classList.add("active");
+      });
+
+      document.getElementById("close-invoice-btn").addEventListener("click", () => {
+        document.getElementById("invoice-modal").classList.remove("active");
+      });
+
+      // Checkout WhatsApp
+      document.getElementById("wa-checkout-btn").addEventListener("click", () => {
+        if (cart.length === 0) {
+          showToast("Keranjang masih kosong!");
+          return;
+        }
+        const name = document.getElementById("buyer-name").value.trim() || "Pelanggan";
+        const address = document.getElementById("buyer-address").value.trim() || "-";
+        const { discount, shipping, total } = getCartTotals();
+        let text = `Halo ProStroke Billiard, saya ingin memesan:\n\n`;
+        cart.forEach(item => {
+          const cue = billiardCues[item.idx];
+          const subtotal = (cue.price + (item.extraPrice || 0)) * item.qty;
+          text += `- ${cue.name} [${item.variant}] (${item.qty}x) = ${formatRupiah(subtotal)}\n`;
+        });
+        if (discount > 0) text += `\nDiskon Promo: -${formatRupiah(discount)}`;
+        text += `\nOngkos Kirim: ${shipping === 0 ? "Gratis" : formatRupiah(shipping)}`;
+        text += `\n*Total: ${formatRupiah(total)}*\n`;
+        text += `Nama: ${name}\nAlamat: ${address}`;
+        window.open(`https://wa.me/${storeWhatsApp}?text=${encodeURIComponent(text)}`, "_blank");
+      });
+
+      renderSpotlight();
+      renderCategories();
+      renderCatalog();
+      updateFavUI();
+      updateCartUI();
+    });
+  </script>
+</body>
+</html>
